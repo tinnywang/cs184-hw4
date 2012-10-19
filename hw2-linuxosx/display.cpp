@@ -312,13 +312,15 @@ void draw_room(double width, double length, double height) {
 
 void draw_pillar() {
   double cyl_height = 5;
-  draw_cube(1.4, 1.4, .1, cyl_height/2+.2, false);
-  draw_cube(1.2, 1.2, .1, cyl_height/2+.1, false);
-  draw_cylinder(.6, .6, .1, cyl_height/2);
-  draw_cylinder(.5, .5,  cyl_height, -cyl_height/2);
-  draw_cylinder(.6, .6, .1, -cyl_height/2 - .1);
-  draw_cylinder(.6, .7, .2, -cyl_height/2 - .3);
-  draw_cube(1.4, 1.4, .4, -cyl_height/2 - .7, false);
+  double normalize_radius = 2*1.4;
+  double normalize_height = cyl_height + 1;
+  draw_cube(1.4/normalize_radius, 1.4/normalize_radius, .1 / normalize_height, (cyl_height/2+.2)/ normalize_height, false);
+  draw_cube(1.2/normalize_radius, 1.2/normalize_radius, .1/ normalize_height, (cyl_height/2+.1)/ normalize_height, false);
+  draw_cylinder(.6/normalize_radius, .6/normalize_radius, .1/ normalize_height, (cyl_height/2)/ normalize_height);
+  draw_cylinder(.5/normalize_radius, .5/normalize_radius,  cyl_height/ normalize_height, -(cyl_height/2)/ normalize_height);
+  draw_cylinder(.6/normalize_radius, .6/normalize_radius, .1/ normalize_height, (-cyl_height/2 - .1)/ normalize_height);
+  draw_cylinder(.6/normalize_radius, .7/normalize_radius, .2/ normalize_height, (-cyl_height/2 - .3)/ normalize_height);
+  draw_cube(1.4/normalize_radius, 1.4/normalize_radius, .4/ normalize_height, (-cyl_height/2 - .7)/ normalize_height, false);
 }
 
 // New helper transformation function to transform vector by modelview 
