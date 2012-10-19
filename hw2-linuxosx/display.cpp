@@ -88,101 +88,154 @@ void draw_claptrap() {
   draw_obj(vertices, normals);
 }
 
-void draw_room(int width, int length, int height) {
+void draw_cube(double width, double length, double height, double y_start, bool inverse_norm) {
   vector<glm::vec3> vertices, normals;
   //left
-  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
-  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
-  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
   
-  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));  
-  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));
-  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
   
-  normals.push_back(glm::vec3(1,0,0));
-  normals.push_back(glm::vec3(1,0,0));
-  normals.push_back(glm::vec3(1,0,0));
-  normals.push_back(glm::vec3(1,0,0));
-  normals.push_back(glm::vec3(1,0,0));
-  normals.push_back(glm::vec3(1,0,0));
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(1,0,0));
+    normals.push_back(glm::vec3(1,0,0));
+    normals.push_back(glm::vec3(1,0,0));
+    normals.push_back(glm::vec3(1,0,0));
+    normals.push_back(glm::vec3(1,0,0));
+    normals.push_back(glm::vec3(1,0,0));
+  } else {
+    normals.push_back(-glm::vec3(1,0,0));
+    normals.push_back(-glm::vec3(1,0,0));
+    normals.push_back(-glm::vec3(1,0,0));
+    normals.push_back(-glm::vec3(1,0,0));
+    normals.push_back(-glm::vec3(1,0,0));
+    normals.push_back(-glm::vec3(1,0,0));
+  }
   //right
-  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
   
-  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));  
-  vertices.push_back(glm::vec3(width/2,height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
+  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
   
-  normals.push_back(glm::vec3(-1,0,0));
-  normals.push_back(glm::vec3(-1,0,0));
-  normals.push_back(glm::vec3(-1,0,0));
-  normals.push_back(glm::vec3(-1,0,0));
-  normals.push_back(glm::vec3(-1,0,0));
-  normals.push_back(glm::vec3(-1,0,0));
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(-1,0,0));
+    normals.push_back(glm::vec3(-1,0,0));
+    normals.push_back(glm::vec3(-1,0,0));
+    normals.push_back(glm::vec3(-1,0,0));
+    normals.push_back(glm::vec3(-1,0,0));
+    normals.push_back(glm::vec3(-1,0,0));
+  } else {
+    normals.push_back(-glm::vec3(-1,0,0));
+    normals.push_back(-glm::vec3(-1,0,0));
+    normals.push_back(-glm::vec3(-1,0,0));
+    normals.push_back(-glm::vec3(-1,0,0));
+    normals.push_back(-glm::vec3(-1,0,0));
+    normals.push_back(-glm::vec3(-1,0,0));
+  }
   //top
-  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
-  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));
-  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
   
-  vertices.push_back(glm::vec3(width/2,height/2,-length/2));  
-  vertices.push_back(glm::vec3(width/2,height/2,length/2));
-  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));  
+  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
   
-  normals.push_back(glm::vec3(0,-1,0));
-  normals.push_back(glm::vec3(0,-1,0));
-  normals.push_back(glm::vec3(0,-1,0));
-  normals.push_back(glm::vec3(0,-1,0));
-  normals.push_back(glm::vec3(0,-1,0));
-  normals.push_back(glm::vec3(0,-1,0));
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+  } else {
+    normals.push_back(-glm::vec3(0,-1,0));
+    normals.push_back(-glm::vec3(0,-1,0));
+    normals.push_back(-glm::vec3(0,-1,0));
+    normals.push_back(-glm::vec3(0,-1,0));
+    normals.push_back(-glm::vec3(0,-1,0));
+    normals.push_back(-glm::vec3(0,-1,0));
+  }
   
   //bottom
-  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
-  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
   
-  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));  
-  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));  
-  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
+  vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
+  vertices.push_back(glm::vec3(width/2,y_start,length/2));
   
-  normals.push_back(glm::vec3(0,1,0));
-  normals.push_back(glm::vec3(0,1,0));
-  normals.push_back(glm::vec3(0,1,0));
-  normals.push_back(glm::vec3(0,1,0));
-  normals.push_back(glm::vec3(0,1,0));
-  normals.push_back(glm::vec3(0,1,0));
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+  } else {
+    normals.push_back(-glm::vec3(0,1,0));
+    normals.push_back(-glm::vec3(0,1,0));
+    normals.push_back(-glm::vec3(0,1,0));
+    normals.push_back(-glm::vec3(0,1,0));
+    normals.push_back(-glm::vec3(0,1,0));
+    normals.push_back(-glm::vec3(0,1,0));
+  }
   
   //near
-  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,height/2,length/2));
-  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,length/2));
   
-  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));  
-  vertices.push_back(glm::vec3(-width/2,height/2,length/2));  
-  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
+  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));  
+  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
   
-  normals.push_back(glm::vec3(0,0,-1));
-  normals.push_back(glm::vec3(0,0,-1));
-  normals.push_back(glm::vec3(0,0,-1));
-  normals.push_back(glm::vec3(0,0,-1));
-  normals.push_back(glm::vec3(0,0,-1));
-  normals.push_back(glm::vec3(0,0,-1));
-  
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(0,0,-1));
+    normals.push_back(glm::vec3(0,0,-1));
+    normals.push_back(glm::vec3(0,0,-1));
+    normals.push_back(glm::vec3(0,0,-1));
+    normals.push_back(glm::vec3(0,0,-1));
+    normals.push_back(glm::vec3(0,0,-1));
+  } else {
+    normals.push_back(-glm::vec3(0,0,-1));
+    normals.push_back(-glm::vec3(0,0,-1));
+    normals.push_back(-glm::vec3(0,0,-1));
+    normals.push_back(-glm::vec3(0,0,-1));
+    normals.push_back(-glm::vec3(0,0,-1));
+    normals.push_back(-glm::vec3(0,0,-1));
+  }
   //far
-  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
-  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
-  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
   
-  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));  
-  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
-  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));  
+  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));  
   
-  normals.push_back(glm::vec3(0,0,1));
-  normals.push_back(glm::vec3(0,0,1));
-  normals.push_back(glm::vec3(0,0,1));
-  normals.push_back(glm::vec3(0,0,1));
-  normals.push_back(glm::vec3(0,0,1));
-  normals.push_back(glm::vec3(0,0,1));
+  if (inverse_norm) {
+    normals.push_back(glm::vec3(0,0,1));
+    normals.push_back(glm::vec3(0,0,1));
+    normals.push_back(glm::vec3(0,0,1));
+    normals.push_back(glm::vec3(0,0,1));
+    normals.push_back(glm::vec3(0,0,1));
+    normals.push_back(glm::vec3(0,0,1));
+  } else {
+    normals.push_back(-glm::vec3(0,0,1));
+    normals.push_back(-glm::vec3(0,0,1));
+    normals.push_back(-glm::vec3(0,0,1));
+    normals.push_back(-glm::vec3(0,0,1));
+    normals.push_back(-glm::vec3(0,0,1));
+    normals.push_back(-glm::vec3(0,0,1));
+  }
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
@@ -191,6 +244,81 @@ void draw_room(int width, int length, int height) {
   glDrawArrays(GL_TRIANGLES, 0, vertices.size());
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_NORMAL_ARRAY);
+}
+
+void draw_cylinder(double top_radius, double bottom_radius, double height, double y_start) {
+  vector<glm::vec3> vertices, normals;
+  for (int i = 0; i < 360; ++i) {
+    // main cylinder
+    glm::vec3 point1(-bottom_radius,y_start,0);
+    glm::vec3 point2(-top_radius,y_start+height,0);
+    glm::vec3 v1 = point1 * Transform::rotate(i, glm::vec3(0,1,0));
+    glm::vec3 v2 = point2 * Transform::rotate(i, glm::vec3(0,1,0));
+    glm::vec3 v3 = point1 * Transform::rotate(i+1, glm::vec3(0,1,0));
+    glm::vec3 v4 = point2 * Transform::rotate(i+1, glm::vec3(0,1,0));
+    
+    glm::vec3 norm1 = glm::vec3(-1,0,0) * Transform::rotate(i, glm::vec3(0,1,0));
+    glm::vec3 norm2 = glm::vec3(-1,0,0) * Transform::rotate(i+1, glm::vec3(0,1,0));
+    
+    // curve part
+    vertices.push_back(v1); 
+    vertices.push_back(v3);  
+    vertices.push_back(v4);  
+    
+    vertices.push_back(v1);  
+    vertices.push_back(v4);  
+    vertices.push_back(v2);  
+    
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+    normals.push_back(norm2);
+
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+    normals.push_back(norm1);   
+    
+    // top face
+    vertices.push_back(v2);
+    vertices.push_back(v4);
+    vertices.push_back(glm::vec3(0,y_start+height,0));
+    
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+    normals.push_back(glm::vec3(0,1,0));
+        
+    // bottom face
+    vertices.push_back(v1);
+    vertices.push_back(glm::vec3(0,y_start,0));
+    vertices.push_back(v3);
+    
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+    normals.push_back(glm::vec3(0,-1,0));
+  }
+
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_NORMAL_ARRAY);
+}
+
+
+void draw_room(double width, double length, double height) {
+  draw_cube(width, length, height, -height/2, true);
+}
+
+void draw_pillar() {
+  double cyl_height = 5;
+  draw_cube(1.4, 1.4, .1, cyl_height/2+.2, false);
+  draw_cube(1.2, 1.2, .1, cyl_height/2+.1, false);
+  draw_cylinder(.6, .6, .1, cyl_height/2);
+  draw_cylinder(.5, .5,  cyl_height, -cyl_height/2);
+  draw_cylinder(.6, .6, .1, -cyl_height/2 - .1);
+  draw_cylinder(.6, .7, .2, -cyl_height/2 - .3);
+  draw_cube(1.4, 1.4, .4, -cyl_height/2 - .7, false);
 }
 
 // New helper transformation function to transform vector by modelview 
@@ -290,12 +418,12 @@ void display() {
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	  glColor3f(0, 0, 0);
 	  glUniform1i(enablelighting, false);
-	  */
+	  
 
           // Actually draw the object
           // We provide the actual glut drawing functions for you. 
-	  if (obj -> type == claptrap) {
-	    draw_claptrap();
+	  if (obj -> type == pillar) {
+	    draw_pillar();
 	  } else if (obj -> type == room) {
       draw_room(obj->width, obj->length, obj->height);
 	  } else if (obj -> type == cube) {
@@ -316,9 +444,10 @@ void display() {
 	  glDisable(GL_LINE_SMOOTH);
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	  glUniform1i(enablelighting, true);
+	  */
 	  // Redraw the object so that it can be cel shaded.
-	  if (obj -> type == claptrap) {
-	    draw_claptrap();
+	  if (obj -> type == pillar) {
+	    draw_pillar();
 	  } else if (obj -> type == room) {
         draw_room(obj->width, obj->length, obj->height);
   	  } else if (obj -> type == cube) {

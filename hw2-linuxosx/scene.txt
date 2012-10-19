@@ -21,7 +21,7 @@ specular 1 1 1 1
 shininess 100
 
 pushTransform
-room 100 100 10
+room 100 300 30
 popTransform
 
 #pushTransform

@@ -35,7 +35,7 @@ void reshape(int width, int height){
         mat4 mv ; // just like for lookat
 
 	glMatrixMode(GL_PROJECTION);
-        float aspect = w / (float) h, zNear = 0.1, zFar = 99.0 ;
+        float aspect = w / (float) h, zNear = 0.1, zFar = 1000.0 ;
         // I am changing the projection stuff to be consistent with lookat
         if (useGlu) mv = glm::perspective(fovy,aspect,zNear,zFar) ; 
         else {

@@ -16,11 +16,6 @@ specular 1 1 1 1
 shininess 100
 
 pushTransform
-translate 1.5 -3 -0.8
-scale .05 .05 .05
-rotate 0 1 0 -90
-rotate 1 0 0 20
-rotate 0 0 1 -15
-claptrap 0
+pillar 0
 popTransform
 #teapot 2
