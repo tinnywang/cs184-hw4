@@ -446,13 +446,15 @@ void display() {
 	  glDisable(GL_LINE_SMOOTH);
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	  glUniform1i(enablelighting, true);
-	  */
+	  */    
 	  // Redraw the object so that it can be cel shaded.
 	  if (obj -> type == pillar) {
 	    draw_pillar();
 	  } else if (obj -> type == room) {
         draw_room(obj->width, obj->length, obj->height);
-  	  } else if (obj -> type == cube) {
+  	} else if (obj -> type == cylinder) {
+        draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
+    } else if (obj -> type == cube) {
             glutSolidCube(obj->size) ;
           }
           else if (obj -> type == sphere) {
