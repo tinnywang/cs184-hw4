@@ -160,14 +160,24 @@ void readfile(const char * filename) {
 
         // I've left the code for loading objects in the skeleton, so 
         // you can get a sense of how this works.  
-        else if (cmd == "sphere" || cmd == "cube" || cmd == "teapot" || cmd == "claptrap") {
+        else if (cmd == "sphere" || cmd == "cube" || cmd == "teapot" || cmd == "claptrap" || cmd == "room") {
           if (numobjects == maxobjects) // No more objects 
             cerr << "Reached Maximum Number of Objects " << numobjects << " Will ignore further objects\n" ; 
           else {
-            validinput = readvals(s, 1, values) ; 
+            if (cmd == "room") {
+              validinput = readvals(s, 3, values) ; 
+            } else {
+              validinput = readvals(s, 1, values) ; 
+            }
             if (validinput) {
               object * obj = &(objects[numobjects]) ; 
-              obj -> size = values[0] ; 
+              if (cmd == "room") {
+                obj -> width = values[0];
+                obj -> length = values[1];
+                obj -> height = values[2];
+              } else {
+                obj -> size = values[0] ; 
+              }
               for (i = 0 ; i < 4 ; i++) {
                 (obj -> ambient)[i] = ambient[i] ; 
                 (obj -> diffuse)[i] = diffuse[i] ; 
@@ -180,6 +190,8 @@ void readfile(const char * filename) {
               else if (cmd == "cube") obj -> type = cube ; 
               else if (cmd == "teapot") obj -> type = teapot ; 
               else if (cmd == "claptrap") obj -> type = claptrap;  
+              else if (cmd == "room") obj -> type = room;  
+              
 	  }
             ++numobjects ; 
           }

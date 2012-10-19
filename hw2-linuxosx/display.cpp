@@ -88,6 +88,111 @@ void draw_claptrap() {
   draw_obj(vertices, normals);
 }
 
+void draw_room(int width, int length, int height) {
+  vector<glm::vec3> vertices, normals;
+  //left
+  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  
+  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));  
+  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  
+  normals.push_back(glm::vec3(1,0,0));
+  normals.push_back(glm::vec3(1,0,0));
+  normals.push_back(glm::vec3(1,0,0));
+  normals.push_back(glm::vec3(1,0,0));
+  normals.push_back(glm::vec3(1,0,0));
+  normals.push_back(glm::vec3(1,0,0));
+  //right
+  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
+  
+  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));  
+  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  
+  normals.push_back(glm::vec3(-1,0,0));
+  normals.push_back(glm::vec3(-1,0,0));
+  normals.push_back(glm::vec3(-1,0,0));
+  normals.push_back(glm::vec3(-1,0,0));
+  normals.push_back(glm::vec3(-1,0,0));
+  normals.push_back(glm::vec3(-1,0,0));
+  //top
+  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  
+  vertices.push_back(glm::vec3(width/2,height/2,-length/2));  
+  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(-width/2,height/2,length/2));
+  
+  normals.push_back(glm::vec3(0,-1,0));
+  normals.push_back(glm::vec3(0,-1,0));
+  normals.push_back(glm::vec3(0,-1,0));
+  normals.push_back(glm::vec3(0,-1,0));
+  normals.push_back(glm::vec3(0,-1,0));
+  normals.push_back(glm::vec3(0,-1,0));
+  
+  //bottom
+  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
+  
+  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));  
+  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));  
+  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
+  
+  normals.push_back(glm::vec3(0,1,0));
+  normals.push_back(glm::vec3(0,1,0));
+  normals.push_back(glm::vec3(0,1,0));
+  normals.push_back(glm::vec3(0,1,0));
+  normals.push_back(glm::vec3(0,1,0));
+  normals.push_back(glm::vec3(0,1,0));
+  
+  //near
+  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  vertices.push_back(glm::vec3(width/2,-height/2,length/2));
+  
+  vertices.push_back(glm::vec3(-width/2,-height/2,length/2));  
+  vertices.push_back(glm::vec3(-width/2,height/2,length/2));  
+  vertices.push_back(glm::vec3(width/2,height/2,length/2));
+  
+  normals.push_back(glm::vec3(0,0,-1));
+  normals.push_back(glm::vec3(0,0,-1));
+  normals.push_back(glm::vec3(0,0,-1));
+  normals.push_back(glm::vec3(0,0,-1));
+  normals.push_back(glm::vec3(0,0,-1));
+  normals.push_back(glm::vec3(0,0,-1));
+  
+  //far
+  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(width/2,-height/2,-length/2));
+  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  
+  vertices.push_back(glm::vec3(-width/2,-height/2,-length/2));  
+  vertices.push_back(glm::vec3(width/2,height/2,-length/2));
+  vertices.push_back(glm::vec3(-width/2,height/2,-length/2));  
+  
+  normals.push_back(glm::vec3(0,0,1));
+  normals.push_back(glm::vec3(0,0,1));
+  normals.push_back(glm::vec3(0,0,1));
+  normals.push_back(glm::vec3(0,0,1));
+  normals.push_back(glm::vec3(0,0,1));
+  normals.push_back(glm::vec3(0,0,1));
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_NORMAL_ARRAY);
+}
+
 // New helper transformation function to transform vector by modelview 
 // May be better done using newer glm functionality.
 // Provided for your convenience.  Use is optional.  
@@ -177,6 +282,7 @@ void display() {
           }
 
 	  // Draw the outline of objects
+	  /*
 	  glEnable(GL_CULL_FACE);
 	  glCullFace(GL_FRONT);
 	  glEnable(GL_LINE_SMOOTH);
@@ -184,11 +290,14 @@ void display() {
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	  glColor3f(0, 0, 0);
 	  glUniform1i(enablelighting, false);
+	  */
 
           // Actually draw the object
           // We provide the actual glut drawing functions for you. 
 	  if (obj -> type == claptrap) {
 	    draw_claptrap();
+	  } else if (obj -> type == room) {
+      draw_room(obj->width, obj->length, obj->height);
 	  } else if (obj -> type == cube) {
             glutSolidCube(obj->size) ; 
           }
@@ -207,11 +316,12 @@ void display() {
 	  glDisable(GL_LINE_SMOOTH);
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	  glUniform1i(enablelighting, true);
-	  
 	  // Redraw the object so that it can be cel shaded.
 	  if (obj -> type == claptrap) {
 	    draw_claptrap();
-	  } else if (obj -> type == cube) {
+	  } else if (obj -> type == room) {
+        draw_room(obj->width, obj->length, obj->height);
+  	  } else if (obj -> type == cube) {
             glutSolidCube(obj->size) ;
           }
           else if (obj -> type == sphere) {

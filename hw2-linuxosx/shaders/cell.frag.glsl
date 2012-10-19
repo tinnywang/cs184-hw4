@@ -31,11 +31,39 @@ uniform vec4 specular ;
 uniform vec4 emission ; 
 uniform float shininess ;
 
+const float interval1 = 0.1;
+const float interval2 = 0.3;
+const float interval3 = 0.6;
+const float interval4 = 1.0;
+
 vec4 phongIllumination(vec3 normal, vec3 direction, vec3 halfAngle, vec4 lightcolor) {
-    float nDotL = dot(normal, direction);
-    vec4 diffuseTerm = diffuse * lightcolor * max(nDotL, 0.0);
-    float nDotH = dot(normal, halfAngle);
-    vec4 specularTerm = specular * lightcolor * pow(max(nDotH, 0.0), shininess);
+    float df = max(dot(normal, direction), 0.0);
+    float epsilon = fwidth(df);
+    if (df > interval1 - epsilon && df < interval1 + epsilon) {
+      df = mix(interval1, interval2, smoothstep(interval1 - epsilon, interval1 + epsilon, df));
+    } else if (df > interval2 - epsilon && df < interval2 + epsilon) {
+      df = mix(interval2, interval3, smoothstep(interval2 - epsilon, interval2 + epsilon, df));
+    } else if (df > interval3 - epsilon && df < interval3 + epsilon) {
+      df = mix(interval3, interval4, smoothstep(interval3 - epsilon, interval3 + epsilon, df));
+    } else if (df < interval1) {
+      df = 0.0;
+    } else if (df < interval2) {
+      df = interval2;
+    } else if (df < interval3) {
+      df = interval3;
+    } else {
+      df = interval4;
+    }
+    vec4 diffuseTerm = diffuse * lightcolor * df;
+
+    float sf = pow(max(dot(normal, halfAngle), 0.0), shininess);
+    epsilon = fwidth(sf);
+    if(sf > 0.5 - epsilon && sf < 0.5 + epsilon) {
+      sf = smoothstep(0.5 - epsilon, 05 + epsilon, sf);
+    } else {
+      sf = step(0.5, sf);
+    }
+    vec4 specularTerm = specular * lightcolor * sf;
     return diffuseTerm + specularTerm;
 }
 
