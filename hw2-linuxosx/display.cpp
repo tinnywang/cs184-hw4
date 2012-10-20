@@ -50,20 +50,64 @@ void load_obj(const char * filename, vector<glm::vec3> &face_vertices, vector<gl
 
       // face
       } else if (cmd.compare("f") == 0) {
-	int vertexIndex[3], vertexTextureIndex[3], normalIndex[3];
-	string index, temp[3];
-	ss >> temp[0] >> temp[1] >> temp[2];
+  int loop_count = 3;
+	string index, temp[5];
+	ss >> temp[0] >> temp[1] >> temp[2] >> temp[3] >> temp[4];
+  if (temp[4] != "") {
+    loop_count = 5;
+  } else if (temp[3] != "") {
+    loop_count = 4;
+  }
 	int i;
-	for (i = 0; i < 3; i++) {
+  vector<glm::vec3> temp_face;
+  vector<glm::vec3> temp_norm;
+	for (i = 0; i < loop_count; i++) {
 	  stringstream temp_ss(temp[i]);
 	  getline(temp_ss, index, '/');
 	  glm::vec3 vertex = vertices[atoi(index.c_str()) - 1];
-	  face_vertices.push_back(vertex);
+	  temp_face.push_back(vertex);
 	  getline(temp_ss, index, '/');
 	  // skip texture
 	  getline(temp_ss, index, '/');
 	  glm::vec3 normal = normals[atoi(index.c_str()) - 1];
-	  face_normals.push_back(normal);
+	  temp_norm.push_back(normal);
+	}
+	if (temp_face.size() == 4) {
+    face_vertices.push_back(temp_face[0]);
+    face_vertices.push_back(temp_face[1]);
+    face_vertices.push_back(temp_face[2]);
+    face_normals.push_back(temp_norm[0]);
+    face_normals.push_back(temp_norm[1]);
+    face_normals.push_back(temp_norm[2]);
+    
+    face_vertices.push_back(temp_face[0]);
+    face_vertices.push_back(temp_face[2]);
+    face_vertices.push_back(temp_face[3]);
+    face_normals.push_back(temp_norm[0]);
+    face_normals.push_back(temp_norm[2]);
+    face_normals.push_back(temp_norm[3]);
+	}
+	if (temp_face.size() == 5) {
+    face_vertices.push_back(temp_face[0]);
+    face_vertices.push_back(temp_face[1]);
+    face_vertices.push_back(temp_face[2]);
+    face_normals.push_back(temp_norm[0]);
+    face_normals.push_back(temp_norm[1]);
+    face_normals.push_back(temp_norm[2]);
+    
+    face_vertices.push_back(temp_face[0]);
+    face_vertices.push_back(temp_face[2]);
+    face_vertices.push_back(temp_face[3]);
+    face_normals.push_back(temp_norm[0]);
+    face_normals.push_back(temp_norm[2]);
+    face_normals.push_back(temp_norm[3]);
+    
+    face_vertices.push_back(temp_face[0]);
+    face_vertices.push_back(temp_face[3]);
+    face_vertices.push_back(temp_face[4]);
+    face_normals.push_back(temp_norm[0]);
+    face_normals.push_back(temp_norm[3]);
+    face_normals.push_back(temp_norm[4]);
 	}
       }  else {
       }
@@ -85,6 +129,12 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
 void draw_claptrap() {
   vector<glm::vec3> vertices, normals;
   load_obj("claptrap/Clap Trap.obj", vertices, normals);
+  draw_obj(vertices, normals);
+}
+
+void draw_sword() {
+  vector<glm::vec3> vertices, normals;
+  load_obj("sword/sword.obj", vertices, normals);
   draw_obj(vertices, normals);
 }
 
@@ -452,7 +502,9 @@ void display() {
 	    draw_pillar();
 	  } else if (obj -> type == room) {
         draw_room(obj->width, obj->length, obj->height);
-  	} else if (obj -> type == cylinder) {
+  	} else if (obj -> type == sword) {
+        draw_sword();
+    }else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == cube) {
             glutSolidCube(obj->size) ;

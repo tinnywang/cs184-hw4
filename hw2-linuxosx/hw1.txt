@@ -16,9 +16,7 @@ specular 1 1 1 1
 shininess 100
 
 pushTransform
-scale 2 1 1
-
-cylinder 20 20 2
+sword 0
 #pillar 0
 popTransform
 #teapot 2
