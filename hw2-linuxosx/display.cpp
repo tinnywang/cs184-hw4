@@ -138,6 +138,12 @@ void draw_sword() {
   draw_obj(vertices, normals);
 }
 
+void draw_arch() {
+  vector<glm::vec3> vertices, normals;
+  load_obj("arch.obj", vertices, normals);
+  draw_obj(vertices, normals);
+}
+
 void draw_cube(double width, double length, double height, double y_start, bool inverse_norm) {
   vector<glm::vec3> vertices, normals;
   //left
@@ -504,6 +510,8 @@ void display() {
         draw_room(obj->width, obj->length, obj->height);
   	} else if (obj -> type == sword) {
         draw_sword();
+    } else if (obj -> type == arch) {
+	draw_arch();
     }else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == cube) {
