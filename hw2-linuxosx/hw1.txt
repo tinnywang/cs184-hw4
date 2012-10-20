@@ -4,7 +4,7 @@
 # Teapot geometry specified at end
 
 size 600 400
-camera 0 0 30 0 0 0 0 1 0 90.0
+camera 0 0 2 0 0 0 0 1 0 90.0
 
 light 0 5 10 1 0.6 0.3 0.0 1.0 
 light 0 5 -10 1 0 0.3 0.6 1 
@@ -16,7 +16,10 @@ specular 1 1 1 1
 shininess 100
 
 pushTransform
-sword 0
-#pillar 0
+cube 1
+popTransform
+
+pushTransform
+pillar 0
 popTransform
 #teapot 2

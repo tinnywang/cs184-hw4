@@ -251,7 +251,7 @@ void readfile(const char * filename) {
 
         eye = eyeinit ; 
 	up = upinit ; 
-	amount = 5;
+	amount = 50;
         sx = sy = 1.0 ; // scales in x and y 
         tx = ty = 0.0 ; // translation in x and y  
 	useGlu = false; // don't use the glu perspective/lookat fns
