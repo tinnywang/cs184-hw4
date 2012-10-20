@@ -48,7 +48,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 45
+  translate -11.5 -17.5 45
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -64,7 +64,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 35
+  translate -11.5 -17.5 35
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -80,7 +80,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 25
+  translate -11.5 -17.5 25
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -96,7 +96,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 15
+  translate -11.5 -17.5 15
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -112,7 +112,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 5
+  translate -11.5 -17.5 5
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -128,7 +128,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 -5
+  translate -11.5 -17.5 -5
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -144,7 +144,7 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -7.5 -17.5 -15
+  translate -11.5 -17.5 -15
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -169,7 +169,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 45
+  translate 11.5 -17.5 45
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -185,7 +185,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 35
+  translate 11.5 -17.5 35
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -201,7 +201,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 25
+  translate 11.5 -17.5 25
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -217,7 +217,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 15
+  translate 11.5 -17.5 15
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -233,7 +233,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 5
+  translate 11.5 -17.5 5
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -249,7 +249,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 -5
+  translate 11.5 -17.5 -5
   rotate 0 1 0 180
   bench 0
   popTransform
@@ -265,7 +265,7 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 7.5 -17.5 -15
+  translate 11.5 -17.5 -15
   rotate 0 1 0 180
   bench 0
   popTransform
