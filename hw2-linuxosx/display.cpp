@@ -134,7 +134,7 @@ void draw_claptrap() {
 
 void draw_sword() {
   vector<glm::vec3> vertices, normals;
-  load_obj("sword/sword.obj", vertices, normals);
+  load_obj("sword.obj", vertices, normals);
   draw_obj(vertices, normals);
 }
 

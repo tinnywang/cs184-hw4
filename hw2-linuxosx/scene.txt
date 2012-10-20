@@ -7,7 +7,7 @@
 #light 0 5 -10 1 0 0.3 0.6 1 
 
 size 600 400
-camera 0 0 4 0 0 1 0 1 0 90.0
+camera 0 -13 0 0 -13 -40 0 1 0 90.0
 
 #light 6.5 0 0 0 1 0.5 0 1.0 
 light 0 0 50 1 0.2 0.2 1 1 
@@ -202,19 +202,19 @@ translate -25 0 0
 popTransform
 
 pushTransform
-translate 0 -12.5 -50
+translate 0 -15 -50
 scale 1.5 1 1
 cylinder 34 34 1
 popTransform
 
 pushTransform
-translate 0 -13.5 -50
+translate 0 -16 -50
 scale 1.5 1 1
 cylinder 42 42 1
 popTransform
 
 pushTransform
-translate 0 -14.5 -50
+translate 0 -17 -50
 scale 1.5 1 1
 cylinder 50 50 1
 popTransform
@@ -224,6 +224,14 @@ pushTransform
 translate 0 -17 0
 scale 10 1 100
 cube 1
+popTransform
+
+#sword
+pushTransform
+translate 0 5 -40
+rotate 1 0 0 90
+scale .3 .3 .3
+sword 0
 popTransform
 
 
