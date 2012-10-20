@@ -161,7 +161,8 @@ void readfile(const char * filename) {
         // I've left the code for loading objects in the skeleton, so 
         // you can get a sense of how this works.  
         else if (cmd == "sphere" || cmd == "cube" || cmd == "teapot" || cmd == "pillar"
-                 || cmd == "room" || cmd == "cylinder" || cmd == "sword" || cmd == "arch") {
+                 || cmd == "room" || cmd == "cylinder" || cmd == "sword" || cmd == "arch"
+                 || cmd == "bench") {
           if (numobjects == maxobjects) // No more objects 
             cerr << "Reached Maximum Number of Objects " << numobjects << " Will ignore further objects\n" ; 
           else {
@@ -194,6 +195,7 @@ void readfile(const char * filename) {
               else if (cmd == "room") obj -> type = room;
               else if (cmd == "cylinder") obj -> type = cylinder;
               else if (cmd == "sword") obj -> type = sword;
+              else if (cmd == "bench") obj -> type = bench;
 	      else if (cmd == "arch") obj -> type = arch;
 	  }
             ++numobjects ; 
@@ -251,7 +253,7 @@ void readfile(const char * filename) {
 
         eye = eyeinit ; 
 	up = upinit ; 
-	amount = 150;
+	amount = 5;
         sx = sy = 1.0 ; // scales in x and y 
         tx = ty = 0.0 ; // translation in x and y  
 	useGlu = false; // don't use the glu perspective/lookat fns

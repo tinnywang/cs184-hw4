@@ -16,6 +16,6 @@ specular 1 1 1 1
 shininess 100
 
 pushTransform
-rotate 1 0 0 90
-sword 0
+rotate 0 1 0 180
+bench 0
 popTransform
