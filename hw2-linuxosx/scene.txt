@@ -30,6 +30,11 @@ room 100 100 35
 popTransform
 
 pushTransform
+  translate 0 17.5 0
+  barrel_vault 28 25 100
+popTransform
+
+pushTransform
 translate 25 0 0
   pushTransform
   translate 0 -2.5 50

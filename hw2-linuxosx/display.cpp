@@ -308,6 +308,113 @@ void draw_cube(double width, double length, double height, double y_start, bool 
   glDisableClientState(GL_NORMAL_ARRAY);
 }
 
+void draw_barrel_vault(double outer_radius, double inner_radius, double depth) {
+  vector<glm::vec3> vertices, normals;
+  glm::vec3 z_axis(0, 0, 1);
+  glm::vec3 inner_near(inner_radius, 0, -depth/2);
+  glm::vec3 outer_near(outer_radius, 0, -depth/2);
+  glm::vec3 inner_far(inner_radius, 0, depth/2);
+  glm::vec3 outer_far(outer_radius, 0, depth/2);
+  glm::vec3 center_near(0, 0, -depth/2);
+  glm::vec3 center_far(0, 0, depth/2);
+  glm::vec3 norm1, norm2;
+
+  for (int i = 0; i < 180; ++i) {
+    glm::vec3 v1 = inner_near * Transform::rotate(i, z_axis);
+    glm::vec3 v2 = outer_near * Transform::rotate(i, z_axis);
+    glm::vec3 v3 = inner_near * Transform::rotate(i+1, z_axis);
+    glm::vec3 v4 = outer_near * Transform::rotate(i+1, z_axis);
+
+    glm::vec3 v5 = inner_far * Transform::rotate(i, z_axis);
+    glm::vec3 v6 = outer_far * Transform::rotate(i, z_axis);
+    glm::vec3 v7 = inner_far * Transform::rotate(i+1, z_axis);
+    glm::vec3 v8 = outer_far * Transform::rotate(i+1, z_axis);
+
+    // near faces
+    vertices.push_back(v1);
+    vertices.push_back(v2);
+    vertices.push_back(v4);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+
+    vertices.push_back(v1);
+    vertices.push_back(v4);
+    vertices.push_back(v3);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+
+    // far faces
+    vertices.push_back(v5);
+    vertices.push_back(v6);
+    vertices.push_back(v8);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+
+    vertices.push_back(v5);
+    vertices.push_back(v8);
+    vertices.push_back(v7);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+
+    // inner face
+    vertices.push_back(v1);
+    vertices.push_back(v7);
+    vertices.push_back(v3);
+    norm1 = glm::vec3(-1, 0, 0) * Transform::rotate(i, z_axis);
+    norm2 = glm::vec3(-1, 0, 0) * Transform::rotate(i+1, z_axis);
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+    normals.push_back(norm2);
+    vertices.push_back(v1);
+    vertices.push_back(v5);
+    vertices.push_back(v7);
+    normals.push_back(norm1);
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+
+    // outer face
+    vertices.push_back(v2);
+    vertices.push_back(v8);
+    vertices.push_back(v4);
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+    normals.push_back(norm2);
+    vertices.push_back(v2);
+    vertices.push_back(v6);
+    vertices.push_back(v8);
+    normals.push_back(norm1);
+    normals.push_back(norm1);
+    normals.push_back(norm2);
+
+    // near cap
+    vertices.push_back(v3);
+    vertices.push_back(v1);
+    vertices.push_back(center_near);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+    normals.push_back(z_axis);
+    
+    // far cap
+    vertices.push_back(v7);
+    vertices.push_back(v5);
+    vertices.push_back(center_far);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+    normals.push_back(-z_axis);
+  }
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_NORMAL_ARRAY);
+}
+    
 void draw_cylinder(double top_radius, double bottom_radius, double height, double y_start) {
   vector<glm::vec3> vertices, normals;
   for (int i = 0; i < 360; ++i) {
@@ -369,7 +476,99 @@ void draw_cylinder(double top_radius, double bottom_radius, double height, doubl
 
 
 void draw_room(double width, double length, double height) {
-  draw_cube(width, length, height, -height/2, true);
+  //draw_cube(width, length, height, -height/2, true);
+  vector <glm::vec3> vertices, normals;
+  glm::vec3 v1 = glm::vec3(width/2, -height/2, length/2);
+  glm::vec3 v2 = glm::vec3(width/2, -height/2, -length/2);
+  glm::vec3 v3 = glm::vec3(-width/2, -height/2, -length/2);
+  glm::vec3 v4 = glm::vec3(-width/2, -height/2, length/2);
+  glm::vec3 v5 = glm::vec3(width/2, height/2, length/2);
+  glm::vec3 v6 = glm::vec3(width/2, height/2, -length/2);
+  glm::vec3 v7 = glm::vec3(-width/2, height/2, -length/2);
+  glm::vec3 v8 = glm::vec3(-width/2, height/2, length/2);
+
+  // bottom face
+  vertices.push_back(v1);
+  vertices.push_back(v2);
+  vertices.push_back(v3);
+  vertices.push_back(v4);
+  normals.push_back(glm::vec3(0, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+
+  // right face
+  vertices.push_back(v1);
+  vertices.push_back(v5);
+  vertices.push_back(v6);
+  vertices.push_back(v2);
+  normals.push_back(glm::vec3(-1, 0, 0));
+  normals.push_back(glm::vec3(-1, 0, 0));
+  normals.push_back(glm::vec3(-1, 0, 0));
+  normals.push_back(glm::vec3(-1, 0, 0));
+
+  // left face
+  vertices.push_back(v4);
+  vertices.push_back(v3);
+  vertices.push_back(v7);
+  vertices.push_back(v8);
+  normals.push_back(glm::vec3(1, 0, 0));
+  normals.push_back(glm::vec3(1, 0, 0));
+  normals.push_back(glm::vec3(1, 0, 0));
+  normals.push_back(glm::vec3(1, 0, 0));
+
+  // near face
+  vertices.push_back(v1);
+  vertices.push_back(v5);
+  vertices.push_back(v8);
+  vertices.push_back(v4);
+  normals.push_back(glm::vec3(0, 0, -1));
+  normals.push_back(glm::vec3(0, 0, -1));
+  normals.push_back(glm::vec3(0, 0, -1));
+  normals.push_back(glm::vec3(0, 0, -1));
+
+  // far face
+  vertices.push_back(v2);
+  vertices.push_back(v6);
+  vertices.push_back(v7);
+  vertices.push_back(v3);
+  normals.push_back(glm::vec3(0, 0, 1));
+  normals.push_back(glm::vec3(0, 0, 1));
+  normals.push_back(glm::vec3(0, 0, 1));
+  normals.push_back(glm::vec3(0, 0, 1));
+
+  glm::vec3 vault1 = glm::vec3(-width/4, height/2, length/2);
+  glm::vec3 vault2 = glm::vec3(width/4, height/2, length/2);
+  glm::vec3 vault3 = glm::vec3(-width/4, height/2, -length/2);
+  glm::vec3 vault4 = glm::vec3(width/4, height/2, -length/2);
+
+  // left half of top face
+  vertices.push_back(v8);
+  vertices.push_back(vault1);
+  vertices.push_back(vault3);
+  vertices.push_back(v7);
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+ 
+  // right half of top face
+  vertices.push_back(vault2);
+  vertices.push_back(v5);
+  vertices.push_back(v6);
+  vertices.push_back(vault4);
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+  normals.push_back(glm::vec3(0, -1, 0));
+ 
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  glDrawArrays(GL_QUADS, 0, vertices.size());
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_NORMAL_ARRAY);
 }
 
 void draw_pillar() {
@@ -516,7 +715,9 @@ void display() {
 	    draw_pillar();
 	  } else if (obj -> type == room) {
         draw_room(obj->width, obj->length, obj->height);
-  	} else if (obj -> type == sword) {
+  	} else if (obj -> type == barrel_vault) {
+	draw_barrel_vault(obj->outer_radius, obj->inner_radius, obj->depth);
+	} else if (obj -> type == sword) {
         draw_sword();
     } else if (obj -> type == bench) {
       draw_bench();

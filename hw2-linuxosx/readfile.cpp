@@ -162,11 +162,11 @@ void readfile(const char * filename) {
         // you can get a sense of how this works.  
         else if (cmd == "sphere" || cmd == "cube" || cmd == "teapot" || cmd == "pillar"
                  || cmd == "room" || cmd == "cylinder" || cmd == "sword" || cmd == "arch"
-                 || cmd == "bench") {
+                 || cmd == "bench" || cmd == "barrel_vault") {
           if (numobjects == maxobjects) // No more objects 
             cerr << "Reached Maximum Number of Objects " << numobjects << " Will ignore further objects\n" ; 
           else {
-            if (cmd == "room" || cmd == "cylinder") {
+            if (cmd == "room" || cmd == "cylinder" || cmd == "barrel_vault") {
               validinput = readvals(s, 3, values) ; 
             } else {
               validinput = readvals(s, 1, values) ; 
@@ -177,6 +177,10 @@ void readfile(const char * filename) {
                 obj -> width = values[0];
                 obj -> length = values[1];
                 obj -> height = values[2];
+	      } else if (cmd == "barrel_vault") {
+		obj -> outer_radius = values[0];
+		obj -> inner_radius = values[1];
+		obj -> depth = values[2];
               } else {
                 obj -> size = values[0] ; 
               }
@@ -197,6 +201,7 @@ void readfile(const char * filename) {
               else if (cmd == "sword") obj -> type = sword;
               else if (cmd == "bench") obj -> type = bench;
 	      else if (cmd == "arch") obj -> type = arch;
+	      else if (cmd == "barrel_vault") obj -> type = barrel_vault;
 	  }
             ++numobjects ; 
           }
