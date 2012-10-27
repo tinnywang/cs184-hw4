@@ -19,6 +19,7 @@ using namespace std ;
 #include "variables.h"
 #include "readfile.h"
 #include <vector>
+#include <map>
 
 void load_obj(const char * filename, vector<glm::vec3> &face_vertices, vector<glm::vec3> &face_normals) {
   string str, cmd;
@@ -138,20 +139,23 @@ void draw_sword() {
   draw_obj(vertices, normals);
 }
 
+vector<glm::vec3> arch_vertices, arch_normals;
 void draw_arch() {
-  vector<glm::vec3> vertices, normals;
-  load_obj("arch.obj", vertices, normals);
-  draw_obj(vertices, normals);
+  if (arch_vertices.size() == 0) {
+    load_obj("arch.obj", arch_vertices, arch_normals);
+  }
+  draw_obj(arch_vertices, arch_normals);
 }
 
+vector<glm::vec3> bench_vertices, bench_normals;
 void draw_bench() {
-  vector<glm::vec3> vertices, normals;
-  load_obj("bench.obj", vertices, normals);
-  draw_obj(vertices, normals);
+  if (bench_vertices.size() == 0) {
+    load_obj("bench.obj", bench_vertices, bench_normals);
+  }
+  draw_obj(bench_vertices, bench_normals);
 }
 
-void draw_cube(double width, double length, double height, double y_start, bool inverse_norm) {
-  vector<glm::vec3> vertices, normals;
+void init_cube(double width, double length, double height, double y_start, bool inverse_norm, vector<glm::vec3> & vertices, vector<glm::vec3> & normals) {
   //left
   vertices.push_back(glm::vec3(-width/2,y_start,length/2));
   vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
@@ -298,14 +302,12 @@ void draw_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(-glm::vec3(0,0,1));
     normals.push_back(-glm::vec3(0,0,1));
   }
-  
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-  glNormalPointer(GL_FLOAT, 0, &normals[0]);
-  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
+}
+
+void draw_cube(double width, double length, double height, double y_start, bool inverse_norm) {
+  vector<glm::vec3> vertices, normals;
+  init_cube(width, length, height, y_start, inverse_norm, vertices, normals);
+  draw_obj(vertices,normals);
 }
 
 void draw_barrel_vault(double outer_radius, double inner_radius, double depth) {
@@ -406,28 +408,21 @@ void draw_barrel_vault(double outer_radius, double inner_radius, double depth) {
     normals.push_back(-z_axis);
     normals.push_back(-z_axis);
   }
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-  glNormalPointer(GL_FLOAT, 0, &normals[0]);
-  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
+  draw_obj(vertices, normals);
 }
     
-void draw_cylinder(double top_radius, double bottom_radius, double height, double y_start) {
-  vector<glm::vec3> vertices, normals;
-  for (int i = 0; i < 360; ++i) {
+void init_cylinder(double top_radius, double bottom_radius, double height, double y_start, vector<glm::vec3> & vertices, vector<glm::vec3> & normals) {
+  for (int i = 0; i < 360; i += 20) {
     // main cylinder
     glm::vec3 point1(-bottom_radius,y_start,0);
     glm::vec3 point2(-top_radius,y_start+height,0);
     glm::vec3 v1 = point1 * Transform::rotate(i, glm::vec3(0,1,0));
     glm::vec3 v2 = point2 * Transform::rotate(i, glm::vec3(0,1,0));
-    glm::vec3 v3 = point1 * Transform::rotate(i+1, glm::vec3(0,1,0));
-    glm::vec3 v4 = point2 * Transform::rotate(i+1, glm::vec3(0,1,0));
+    glm::vec3 v3 = point1 * Transform::rotate(i+20, glm::vec3(0,1,0));
+    glm::vec3 v4 = point2 * Transform::rotate(i+20, glm::vec3(0,1,0));
     
     glm::vec3 norm1 = glm::vec3(-1,0,0) * Transform::rotate(i, glm::vec3(0,1,0));
-    glm::vec3 norm2 = glm::vec3(-1,0,0) * Transform::rotate(i+1, glm::vec3(0,1,0));
+    glm::vec3 norm2 = glm::vec3(-1,0,0) * Transform::rotate(i+20, glm::vec3(0,1,0));
     
     // curve part
     vertices.push_back(v1); 
@@ -464,16 +459,13 @@ void draw_cylinder(double top_radius, double bottom_radius, double height, doubl
     normals.push_back(glm::vec3(0,-1,0));
     normals.push_back(glm::vec3(0,-1,0));
   }
-
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-  glNormalPointer(GL_FLOAT, 0, &normals[0]);
-  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
 }
 
+void draw_cylinder(double top_radius, double bottom_radius, double height, double y_start) {
+  vector <glm::vec3> vertices, normals;
+  init_cylinder(top_radius, bottom_radius, height, y_start, vertices, normals);
+  draw_obj(vertices, normals);
+}
 
 void draw_room(double width, double length, double height) {
   //draw_cube(width, length, height, -height/2, true);
@@ -571,19 +563,23 @@ void draw_room(double width, double length, double height) {
   glDisableClientState(GL_NORMAL_ARRAY);
 }
 
+vector<glm::vec3> pillar_vertices, pillar_normals;
 void draw_pillar() {
-  float cyl_height = 5;
-  float normalize_side = 1.4;
-  float normalize_radius = 2.8;
-  float normalize_height = cyl_height + 1;
-  float normalized_offset = .5 - ((cyl_height/2+.2)/ normalize_height + .1 / normalize_height);
-  draw_cube(1.4/normalize_side, 1.4/normalize_side, .1 / normalize_height, (cyl_height/2+.2)/ normalize_height + normalized_offset, false);
-  draw_cube(1.2/normalize_side, 1.2/normalize_side, .1/ normalize_height, (cyl_height/2+.1)/ normalize_height + normalized_offset, false);
-  draw_cylinder(1.2/normalize_radius, 1.2/normalize_radius, .1/ normalize_height, (cyl_height/2)/ normalize_height + normalized_offset);
-  draw_cylinder(1/normalize_radius, 1/normalize_radius,  cyl_height/ normalize_height, -(cyl_height/2)/ normalize_height + normalized_offset);
-  draw_cylinder(1.2/normalize_radius, 1.2/normalize_radius, .1/ normalize_height, (-cyl_height/2 - .1)/ normalize_height + normalized_offset);
-  draw_cylinder(1.2/normalize_radius, 1.4/normalize_radius, .2/ normalize_height, (-cyl_height/2 - .3)/ normalize_height + normalized_offset);
-  draw_cube(1.4/normalize_side, 1.4/normalize_side, .4/ normalize_height, (-cyl_height/2 - .7)/ normalize_height + normalized_offset, false);
+  if (pillar_vertices.size() == 0) {
+    float cyl_height = 5;
+    float normalize_side = 1.4;
+    float normalize_radius = 2.8;
+    float normalize_height = cyl_height + 1;
+    float normalized_offset = .5 - ((cyl_height/2+.2)/ normalize_height + .1 / normalize_height);
+    init_cube(1.4/normalize_side, 1.4/normalize_side, .1 / normalize_height, (cyl_height/2+.2)/ normalize_height + normalized_offset, false, pillar_vertices, pillar_normals);
+    init_cube(1.2/normalize_side, 1.2/normalize_side, .1/ normalize_height, (cyl_height/2+.1)/ normalize_height + normalized_offset, false, pillar_vertices, pillar_normals);
+    init_cylinder(1.2/normalize_radius, 1.2/normalize_radius, .1/ normalize_height, (cyl_height/2)/ normalize_height + normalized_offset, pillar_vertices, pillar_normals);
+    init_cylinder(1/normalize_radius, 1/normalize_radius,  cyl_height/ normalize_height, -(cyl_height/2)/ normalize_height + normalized_offset, pillar_vertices, pillar_normals);
+    init_cylinder(1.2/normalize_radius, 1.2/normalize_radius, .1/ normalize_height, (-cyl_height/2 - .1)/ normalize_height + normalized_offset, pillar_vertices, pillar_normals);
+    init_cylinder(1.2/normalize_radius, 1.4/normalize_radius, .2/ normalize_height, (-cyl_height/2 - .3)/ normalize_height + normalized_offset, pillar_vertices, pillar_normals);
+    init_cube(1.4/normalize_side, 1.4/normalize_side, .4/ normalize_height, (-cyl_height/2 - .7)/ normalize_height + normalized_offset, false, pillar_vertices, pillar_normals);
+  }
+  draw_obj(pillar_vertices, pillar_normals);
 }
 
 // New helper transformation function to transform vector by modelview 
