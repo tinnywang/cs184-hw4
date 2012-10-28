@@ -16,10 +16,16 @@ mat3 Transform::rotate(const float degrees, const vec3& axis) {
  
 }
 
-void Transform::left(float degrees, vec3& eye, vec3& up) {
-  // YOUR CODE FOR HW2 HERE
-  // Likely the same as in HW 1. 
-  eye = eye * Transform::rotate(degrees, up); 
+void Transform::left(float degrees, vec3& eye, vec3& up, vec3& center) {
+  glm::mat4 trans = Transform::translate(-eye[0],-eye[1],-eye[2]);
+  glm::vec4 homo_center(center,1);
+  homo_center = homo_center * trans;
+  center = glm::vec3(homo_center[0]/homo_center[3], homo_center[1]/homo_center[3], homo_center[2]/homo_center[3]);
+  center = center * Transform::rotate(degrees, up);
+  trans = Transform::translate(eye[0],eye[1],eye[2]);
+  glm::vec4 homo_center2(center,1);
+  homo_center = homo_center2 * trans;
+  center = glm::vec3(homo_center[0]/homo_center[3], homo_center[1]/homo_center[3], homo_center[2]/homo_center[3]);
 }
 
 void Transform::up(float degrees, vec3& eye, vec3& up) {
@@ -27,6 +33,16 @@ void Transform::up(float degrees, vec3& eye, vec3& up) {
   // Likely the same as in HW 1.  
   eye = eye * Transform::rotate(degrees, glm::cross(eye, up));
   up = glm::cross(eye, glm::normalize(glm::cross(up, eye)));
+}
+
+void Transform::forward(int amount, vec3& eye, vec3& center) {
+  glm::vec3 direction = center-eye;
+  direction = glm::normalize(direction);
+  direction[0] = amount * direction[0];
+  direction[1] = amount * direction[1];
+  direction[2] = amount * direction[2];
+  eye = eye + direction;
+  center = center + direction;
 }
 
 mat4 Transform::lookAt(const vec3 &eye, const vec3 &center, const vec3 &up) {

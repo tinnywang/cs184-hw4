@@ -258,6 +258,7 @@ void readfile(const char * filename) {
 
         eye = eyeinit ; 
 	up = upinit ; 
+  center = centerinit;
 	amount = 5;
         sx = sy = 1.0 ; // scales in x and y 
         tx = ty = 0.0 ; // translation in x and y  

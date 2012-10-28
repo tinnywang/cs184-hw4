@@ -149,6 +149,11 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
+  translate 0 15 -20.75
+  scale 3 5 1.5
+  cube 1
+  popTransform
+  pushTransform
   translate -11.5 -17.5 -15
   rotate 0 1 0 180
   bench 0
@@ -268,6 +273,11 @@ translate -25 0 0
   translate 0 12.5 -15
   rotate 0 1 0 90
   arch 0
+  popTransform
+  pushTransform
+  translate 0 15 -20.75
+  scale 3 5 1.5
+  cube 1
   popTransform
   pushTransform
   translate 11.5 -17.5 -15

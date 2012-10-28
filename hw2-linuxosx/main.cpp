@@ -105,6 +105,7 @@ void keyboard(unsigned char key, int x, int y) {
         case 'r': // reset eye and up vectors, scale and translate. 
 		eye = eyeinit ; 
 		up = upinit ; 
+    center = centerinit;
                 sx = sy = 1.0 ; 
                 tx = ty = 0.0 ; 
 		break ;   
@@ -130,22 +131,22 @@ void keyboard(unsigned char key, int x, int y) {
 void specialKey(int key, int x, int y) {
 	switch(key) {
 	case 100: //left
-          if (transop == view) Transform::left(amount, eye,  up);
+          if (transop == view) Transform::left(amount, eye,  up, center);
           else if (transop == scale) sx -= amount * 0.01 ; 
           else if (transop == translate) tx -= amount * 0.01 ; 
           break;
 	case 101: //up
-          if (transop == view) Transform::up(amount,  eye,  up);
+          if (transop == view) Transform::forward(amount,  eye,  center);
           else if (transop == scale) sy += amount * 0.01 ; 
           else if (transop == translate) ty += amount * 0.01 ; 
           break;
 	case 102: //right
-          if (transop == view) Transform::left(-amount, eye,  up);
+          if (transop == view) Transform::left(-amount, eye,  up, center);
           else if (transop == scale) sx += amount * 0.01 ; 
           else if (transop == translate) tx += amount * 0.01 ; 
           break;
 	case 103: //down
-          if (transop == view) Transform::up(-amount,  eye,  up);
+          if (transop == view) Transform::forward(-amount,  eye,  center);
           else if (transop == scale) sy -= amount * 0.01 ; 
           else if (transop == translate) ty -= amount * 0.01 ; 
           break;
