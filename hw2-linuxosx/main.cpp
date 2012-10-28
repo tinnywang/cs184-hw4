@@ -143,20 +143,17 @@ void keyboard(unsigned char key, int x, int y) {
     transop = scale ; 
     std::cout << "Operation is set to Scale\n" ; 
     break ; 
-    case 'z':
+    case 'x':
       if (fovy < 179) {
         fovy++;
       }
       reshape(w,h) ; 
-      std::cout << fovy << "\n";
     break;
-    case 'x':
+    case 'z':
       if (fovy > 1) {
         fovy--;
       }
-      reshape(w,h) ; 
-      std::cout << fovy << "\n";
-      
+      reshape(w,h) ;       
     break;
   }
   glutPostRedisplay();

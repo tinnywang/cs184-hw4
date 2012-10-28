@@ -10,21 +10,20 @@ size 600 400
 camera 0 0 2 0 0 0 0 1 0 90.0
 
 #light 6.5 0 0 0 1 0.5 0 1.0 
-light 0 0 50 1 0.2 0.2 1 1 
+light 0 0 50 1 0.2 0.2 .2 1 
 
-light -50 -17 -50 1 0.5 0.5 1 1 
-light 50 -17 -50 1 0.5 0.5 1 1
+light -50 -17 -50 1 0.5 0.5 .5 1 
+light 50 -17 -50 1 0.5 .5 .5 1
 
 
 
 ambient 0.2 0.2 0.2 1 
-#diffuse 0.2 0.2 0.2 1
-diffuse 0.5 0.5 0.5 1
 specular 1 1 1 1
 shininess 100
 
 translate 0 0 -45
 
+diffuse .06 .11 .11 1
 pushTransform
 room 100 100 35
 popTransform
@@ -36,64 +35,63 @@ popTransform
 
 pushTransform
 translate 25 0 0
+  #pillar
   pushTransform
   translate 0 -2.5 50
   scale 3 30 3
   pillar 0
   popTransform
-
   pushTransform
   translate 0 -2.5 40
   scale 3 30 3
   pillar 0
   popTransform
   pushTransform
-  translate 0 12.5 45
-  rotate 0 1 0 90
-  arch 0
-  popTransform
-  pushTransform
-  translate -11.5 -17.5 45
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
   translate 0 -2.5 30
   scale 3 30 3
   pillar 0
   popTransform
-  pushTransform
-  translate 0 12.5 35
-  rotate 0 1 0 90
-  arch 0
-  popTransform
-  pushTransform
-  translate -11.5 -17.5 35
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
   pushTransform
   translate 0 -2.5 20
   scale 3 30 3
   pillar 0
   popTransform
   pushTransform
-  translate 0 12.5 25
+  translate 0 -2.5 10
+  scale 3 30 3
+  pillar 0
+  popTransform 
+  pushTransform
+  translate 0 -2.5 0
+  scale 3 30 3  
+  pillar 0
+  popTransform
+  pushTransform
+  translate 0 -2.5 -10
+  scale 3 30 3
+  pillar 0
+  popTransform
+  pushTransform
+  translate 0 -2.5 -20
+  scale 3 30 3
+  pillar 0
+  popTransform
+  
+  #arch
+  pushTransform
+  translate 0 12.5 45
   rotate 0 1 0 90
   arch 0
   popTransform
   pushTransform
-  translate -11.5 -17.5 25
-  rotate 0 1 0 180
-  bench 0
-  popTransform
- 
+  translate 0 12.5 35
+  rotate 0 1 0 90
+  arch 0
+  popTransform  
   pushTransform
-  translate 0 -2.5 10
-  scale 3 30 3
-  pillar 0
+  translate 0 12.5 25
+  rotate 0 1 0 90
+  arch 0
   popTransform
   pushTransform
   translate 0 12.5 15
@@ -101,47 +99,14 @@ translate 25 0 0
   arch 0
   popTransform
   pushTransform
-  translate -11.5 -17.5 15
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 0
-  scale 3 30 3  
-  pillar 0
-  popTransform
-  pushTransform
   translate 0 12.5 5
   rotate 0 1 0 90
   arch 0
   popTransform
   pushTransform
-  translate -11.5 -17.5 5
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 -10
-  scale 3 30 3
-  pillar 0
-  popTransform
-  pushTransform
   translate 0 12.5 -5
   rotate 0 1 0 90
   arch 0
-  popTransform
-  pushTransform
-  translate -11.5 -17.5 -5
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 -20
-  scale 3 30 3
-  pillar 0
   popTransform
   pushTransform
   translate 0 12.5 -15
@@ -152,6 +117,39 @@ translate 25 0 0
   translate 0 15 -20.75
   scale 3 5 1.5
   cube 1
+  popTransform
+  
+  #bench
+  diffuse .55 .27 .075 1
+  pushTransform
+  translate -11.5 -17.5 45
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate -11.5 -17.5 35
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate -11.5 -17.5 25
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate -11.5 -17.5 15
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate -11.5 -17.5 5
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate -11.5 -17.5 -5
+  rotate 0 1 0 180
+  bench 0
   popTransform
   pushTransform
   translate -11.5 -17.5 -15
@@ -160,66 +158,66 @@ translate 25 0 0
   popTransform
 popTransform
 
+diffuse .06 .11 .11 1
 pushTransform
 translate -25 0 0
+  #pillar
   pushTransform
   translate 0 -2.5 50
   scale 3 30 3
   pillar 0
   popTransform
-
   pushTransform
   translate 0 -2.5 40
   scale 3 30 3
   pillar 0
   popTransform
   pushTransform
-  translate 0 12.5 45
-  rotate 0 1 0 90
-  arch 0
-  popTransform
-  pushTransform
-  translate 11.5 -17.5 45
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
   translate 0 -2.5 30
   scale 3 30 3
   pillar 0
   popTransform
-  pushTransform
-  translate 0 12.5 35
-  rotate 0 1 0 90
-  arch 0
-  popTransform
-  pushTransform
-  translate 11.5 -17.5 35
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
   pushTransform
   translate 0 -2.5 20
   scale 3 30 3
   pillar 0
   popTransform
   pushTransform
-  translate 0 12.5 25
+  translate 0 -2.5 10
+  scale 3 30 3
+  pillar 0
+  popTransform 
+  pushTransform
+  translate 0 -2.5 0
+  scale 3 30 3  
+  pillar 0
+  popTransform
+  pushTransform
+  translate 0 -2.5 -10
+  scale 3 30 3
+  pillar 0
+  popTransform
+  pushTransform
+  translate 0 -2.5 -20
+  scale 3 30 3
+  pillar 0
+  popTransform
+  
+  #arch
+  pushTransform
+  translate 0 12.5 45
   rotate 0 1 0 90
   arch 0
   popTransform
   pushTransform
-  translate 11.5 -17.5 25
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
+  translate 0 12.5 35
+  rotate 0 1 0 90
+  arch 0
+  popTransform  
   pushTransform
-  translate 0 -2.5 10
-  scale 3 30 3
-  pillar 0
+  translate 0 12.5 25
+  rotate 0 1 0 90
+  arch 0
   popTransform
   pushTransform
   translate 0 12.5 15
@@ -227,47 +225,14 @@ translate -25 0 0
   arch 0
   popTransform
   pushTransform
-  translate 11.5 -17.5 15
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 0
-  scale 3 30 3  
-  pillar 0
-  popTransform
-  pushTransform
   translate 0 12.5 5
   rotate 0 1 0 90
   arch 0
   popTransform
   pushTransform
-  translate 11.5 -17.5 5
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 -10
-  scale 3 30 3
-  pillar 0
-  popTransform
-  pushTransform
   translate 0 12.5 -5
   rotate 0 1 0 90
   arch 0
-  popTransform
-  pushTransform
-  translate 11.5 -17.5 -5
-  rotate 0 1 0 180
-  bench 0
-  popTransform
-  
-  pushTransform
-  translate 0 -2.5 -20
-  scale 3 30 3
-  pillar 0
   popTransform
   pushTransform
   translate 0 12.5 -15
@@ -279,6 +244,39 @@ translate -25 0 0
   scale 3 5 1.5
   cube 1
   popTransform
+  
+  #bench
+  diffuse .55 .27 .075 1
+  pushTransform
+  translate 11.5 -17.5 45
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate 11.5 -17.5 35
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate 11.5 -17.5 25
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate 11.5 -17.5 15
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate 11.5 -17.5 5
+  rotate 0 1 0 180
+  bench 0
+  popTransform
+  pushTransform
+  translate 11.5 -17.5 -5
+  rotate 0 1 0 180
+  bench 0
+  popTransform
   pushTransform
   translate 11.5 -17.5 -15
   rotate 0 1 0 180
@@ -286,18 +284,17 @@ translate -25 0 0
   popTransform
 popTransform
 
+diffuse .53 .81 .92 1
 pushTransform
 translate 0 -15 -50
 scale 1.5 1 1
 cylinder 34 34 1
 popTransform
-
 pushTransform
 translate 0 -16 -50
 scale 1.5 1 1
 cylinder 42 42 1
 popTransform
-
 pushTransform
 translate 0 -17 -50
 scale 1.5 1 1
@@ -306,13 +303,16 @@ popTransform
 
 #aisle
 pushTransform
-translate 0 -17 0
+diffuse 1 0 0 1
+translate 0 -17.5 0
 scale 10 1 100
 cube 1
+diffuse .48 .5 .56 1
 popTransform
 
 #sword
 pushTransform
+diffuse 1 .843 0 1
 translate 0 5 -40
 rotate 1 0 0 90
 scale .3 .3 .3
