@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 // glm provides vector, matrix classes like glsl
 // Typedefs to make code more readable 
@@ -24,8 +25,9 @@ public:
 	Transform();
 	virtual ~Transform();
   static void left(float degrees, vec3& eye, vec3& up, vec3& center);
-	static void up(float degrees, vec3& eye, vec3& up);
+	static void up(float degrees, vec3& eye, vec3& up, vec3& center);
 	static void forward(int amount, vec3& eye, vec3& center);
+  static void side(int amount, vec3& eye, vec3& up, vec3& center);
 	static mat4 lookAt(const vec3& eye, const vec3 &center, const vec3& up);
 	static mat4 perspective(float fovy, float aspect, float zNear, float zFar);
   static mat3 rotate(const float degrees, const vec3& axis) ;

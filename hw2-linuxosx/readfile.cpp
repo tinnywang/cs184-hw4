@@ -151,7 +151,7 @@ void readfile(const char * filename) {
             // to set up correctly. 
             // Set eyeinit upinit center fovy in variables.h
 	    eyeinit = glm::vec3(values[0], values[1], values[2]);
-	    center = glm::vec3(values[3], values[4], values[5]);
+	    centerinit = glm::vec3(values[3], values[4], values[5]);
 	    upinit = glm::vec3(values[6], values[7], values[8]);
 	    upinit = Transform::upvector(upinit, eyeinit - center);
 	    fovy = values[9]; 
