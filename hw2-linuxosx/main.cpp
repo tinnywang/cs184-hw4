@@ -111,17 +111,10 @@ void keyboard(unsigned char key, int x, int y) {
     std::cout << "amount set to " << amount << "\n" ;
     break;
     case '-':
-    amount--;
-    std::cout << "amount set to " << amount << "\n" ; 
-    break;
-    case 'i':
-    if(allowGrader) {
-      std::cout << "Running tests...\n";
-      grader.runTests();
-      std::cout << "Done! [ESC to quit]\n";
-    } else {
-      std::cout << "Error: no input file specified for grader\n";
+    if (amount > 0) {
+      amount--;
     }
+    std::cout << "amount set to " << amount << "\n" ; 
     break;
     case 'g':
     useGlu = !useGlu;
@@ -138,21 +131,33 @@ void keyboard(unsigned char key, int x, int y) {
     eye = eyeinit ; 
     up = upinit ; 
     center = centerinit;
+    fovy = fovyinit;
     sx = sy = 1.0 ; 
-    tx = ty = 0.0 ; 
+    reshape(w,h) ; 
     break ;   
     case 'v': 
     transop = view ;
     std::cout << "Operation is set to View\n" ; 
     break ; 
-    case 't':
-    transop = translate ; 
-    std::cout << "Operation is set to Translate\n" ; 
-    break ; 
     case 's':
     transop = scale ; 
     std::cout << "Operation is set to Scale\n" ; 
     break ; 
+    case 'z':
+      if (fovy < 179) {
+        fovy++;
+      }
+      reshape(w,h) ; 
+      std::cout << fovy << "\n";
+    break;
+    case 'x':
+      if (fovy > 1) {
+        fovy--;
+      }
+      reshape(w,h) ; 
+      std::cout << fovy << "\n";
+      
+    break;
   }
   glutPostRedisplay();
 }
@@ -163,24 +168,20 @@ void keyboard(unsigned char key, int x, int y) {
 void specialKey(int key, int x, int y) {
   switch(key) {
     case 100: //left
-    if (transop == view) Transform::side(-amount, eye,  up, center);
+    if (transop == view) Transform::side(-amount * .1, eye,  up, center);
     else if (transop == scale) sx -= amount * 0.01 ; 
-    else if (transop == translate) tx -= amount * 0.01 ; 
     break;
     case 101: //up
-    if (transop == view) Transform::forward(amount,  eye,  center);
+    if (transop == view) Transform::forward(amount * .1,  eye,  center);
     else if (transop == scale) sy += amount * 0.01 ; 
-    else if (transop == translate) ty += amount * 0.01 ; 
     break;
     case 102: //right
-    if (transop == view) Transform::side(amount, eye,  up, center);
+    if (transop == view) Transform::side(amount* .1, eye,  up, center);
     else if (transop == scale) sx += amount * 0.01 ; 
-    else if (transop == translate) tx += amount * 0.01 ; 
     break;
     case 103: //down
-    if (transop == view) Transform::forward(-amount,  eye,  center);
+    if (transop == view) Transform::forward(-amount* .1,  eye,  center);
     else if (transop == scale) sy -= amount * 0.01 ; 
-    else if (transop == translate) ty -= amount * 0.01 ; 
     break;
   }
   glutPostRedisplay();

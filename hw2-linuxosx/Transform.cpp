@@ -41,7 +41,7 @@ void Transform::up(float degrees, vec3& eye, vec3& up, vec3& center) {
   center = glm::vec3(homo_center[0]/homo_center[3], homo_center[1]/homo_center[3], homo_center[2]/homo_center[3]);
 }
 
-void Transform::forward(int amount, vec3& eye, vec3& center) {
+void Transform::forward(double amount, vec3& eye, vec3& center) {
   glm::vec3 direction = center-eye;
   direction = glm::normalize(direction);
   direction[0] = amount * direction[0];
@@ -51,7 +51,7 @@ void Transform::forward(int amount, vec3& eye, vec3& center) {
   center = center + direction;
 }
 
-void Transform::side(int amount, vec3& eye, vec3& up, vec3& center) {
+void Transform::side(double amount, vec3& eye, vec3& up, vec3& center) {
   glm::vec3 f_direction = center-eye;
   glm::vec3 s_direction = glm::normalize(glm::cross(f_direction, up));
   s_direction[0] = amount * s_direction[0];

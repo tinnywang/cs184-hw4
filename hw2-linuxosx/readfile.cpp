@@ -154,7 +154,7 @@ void readfile(const char * filename) {
 	    centerinit = glm::vec3(values[3], values[4], values[5]);
 	    upinit = glm::vec3(values[6], values[7], values[8]);
 	    upinit = Transform::upvector(upinit, eyeinit - center);
-	    fovy = values[9]; 
+	    fovyinit = values[9]; 
           }
         }
 
@@ -262,8 +262,8 @@ void readfile(const char * filename) {
 	up = upinit ; 
   center = centerinit;
 	amount = 5;
+  fovy = fovyinit;
         sx = sy = 1.0 ; // scales in x and y 
-        tx = ty = 0.0 ; // translation in x and y  
 	useGlu = false; // don't use the glu perspective/lookat fns
 
 	glEnable(GL_DEPTH_TEST);

@@ -661,7 +661,6 @@ void display() {
         // Transformations for objects, involving translation and scaling 
         mat4 sc(1.0) , tr(1.0), transf(1.0) ; 
         sc = Transform::scale(sx,sy,1.0) ; 
-        tr = Transform::translate(tx,ty,0.0) ; 
 
         // YOUR CODE FOR HW 2 HERE.  
         // You need to use scale, translate and modelview to 
@@ -670,7 +669,6 @@ void display() {
         glLoadMatrixf(&transf[0][0]) ; 
 
 	transf = glm::transpose(mv) * transf;	
-	transf = tr * transf;
 	transf = sc * transf;
 	for (int i = 0 ; i < numobjects ; i++) {
           object * obj = &(objects[i]) ; 

@@ -24,21 +24,23 @@ vec3 upinit(0.0,1.0,0.0) ; // Initial up position, also for resets
 vec3 centerinit(0.0,0.0,0.0) ; // Center look at point 
 int w = 600, h = 400 ; // width and height 
 float fovy = 90.0 ; // For field of view
+float fovyinit = 90.0 ;
+
 #else 
 EXTERN vec3 eyeinit ; 
 EXTERN vec3 upinit ; 
 EXTERN vec3 centerinit ; 
 EXTERN int w, h ; 
 EXTERN float fovy ; 
+EXTERN float fovyinit ;
 #endif 
 
 EXTERN bool useGlu; // Toggle use of "official" opengl/glm transform vs user 
 EXTERN GLuint vertexshader, fragmentshader, shaderprogram ; // shaders
-static enum {view, translate, scale} transop ; // which operation to transform 
+static enum {view, scale} transop ; // which operation to transform 
 enum shape {cube, sphere, teapot, pillar, room, cylinder, sword, arch, bench,
 	barrel_vault, window, glass} ;
 EXTERN float sx, sy ; // the scale in x and y 
-EXTERN float tx, ty ; // the translation in x and y
 
 // Lighting parameter array, similar to that in the fragment shader
 const int numLights = 10 ; 
