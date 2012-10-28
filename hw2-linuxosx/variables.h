@@ -35,7 +35,8 @@ EXTERN float fovy ;
 EXTERN bool useGlu; // Toggle use of "official" opengl/glm transform vs user 
 EXTERN GLuint vertexshader, fragmentshader, shaderprogram ; // shaders
 static enum {view, translate, scale} transop ; // which operation to transform 
-enum shape {cube, sphere, teapot, pillar, room, cylinder, sword, arch, bench, barrel_vault} ;
+enum shape {cube, sphere, teapot, pillar, room, cylinder, sword, arch, bench,
+	barrel_vault, window, glass} ;
 EXTERN float sx, sy ; // the scale in x and y 
 EXTERN float tx, ty ; // the translation in x and y
 
@@ -55,7 +56,7 @@ EXTERN GLfloat emission[4] ;
 EXTERN GLfloat shininess ; 
 
 // For multiple objects, read from a file.  
-const int maxobjects = 100 ; 
+const int maxobjects = 1000 ; 
 EXTERN int numobjects ; 
 EXTERN struct object {
   shape type ; 

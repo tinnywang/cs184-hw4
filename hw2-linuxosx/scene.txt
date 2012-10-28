@@ -89,7 +89,7 @@ translate 25 0 0
   rotate 0 1 0 180
   bench 0
   popTransform
-  
+ 
   pushTransform
   translate 0 -2.5 10
   scale 3 30 3
@@ -317,6 +317,195 @@ translate 0 5 -40
 rotate 1 0 0 90
 scale .3 .3 .3
 sword 0
+popTransform
+
+#window
+pushTransform
+  translate -49.5 0 0
+  pushTransform
+    translate 0 0 45
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 35
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 25
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 15
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 5
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -5
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -15
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -25
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -35
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -45
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+popTransform
+
+pushTransform
+  translate 49.5 0 0
+  pushTransform
+    translate 0 0 45
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 35
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 25
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 15
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 5
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -5
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -15
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -25
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -35
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
+  pushTransform
+    translate 0 0 -45
+    rotate 0 1 0 90
+    scale 2 2 2
+    diffuse 1.0 1.0 0.0 1
+    glass 0
+    diffuse 1.0 0.0 1.0 1
+    window 0
+  popTransform
 popTransform
 
 

@@ -126,6 +126,21 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_NORMAL_ARRAY);
 }
+vector<glm::vec3> window_vertices, window_normals;
+void draw_window() {
+  if (window_vertices.size() == 0) {
+    load_obj("window.obj", window_vertices, window_normals);
+  }
+  draw_obj(window_vertices, window_normals);
+}
+
+vector<glm::vec3> glass_vertices, glass_normals;
+void draw_glass() {
+  if (glass_vertices.size() == 0) {
+    load_obj("glass.obj", glass_vertices, glass_normals);
+  }
+  draw_obj(glass_vertices, glass_normals);
+}
 
 void draw_claptrap() {
   vector<glm::vec3> vertices, normals;
@@ -718,6 +733,10 @@ void display() {
 	draw_barrel_vault(obj->outer_radius, obj->inner_radius, obj->depth);
 	} else if (obj -> type == sword) {
         draw_sword();
+    } else if (obj -> type == window) {
+      draw_window();
+    } else if (obj -> type == glass) {
+      draw_glass();
     } else if (obj -> type == bench) {
       draw_bench();
     } else if (obj -> type == arch) {
