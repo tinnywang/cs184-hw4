@@ -14,12 +14,22 @@
 #include <stack>
 #include <GL/glut.h>
 #include "Transform.h"
+#include "Simple OpenGL Image Library/src/SOIL.h"
 
 using namespace std ; 
 #include "variables.h"
 #include "readfile.h"
 #include <vector>
 #include <map>
+
+GLuint load_texture(const char * filename) {
+  GLuint tex2d = SOIL_load_OGL_texture(
+    filename,
+    SOIL_LOAD_AUTO,
+    SOIL_CREATE_NEW_ID,
+    SOIL_FLAG_POWER_OF_TWO| SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_INVERT_Y);
+  return tex2d;
+}
 
 void load_obj(const char * filename, vector<glm::vec3> &face_vertices, vector<glm::vec3> &face_normals) {
   string str, cmd;
@@ -126,6 +136,97 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_NORMAL_ARRAY);
 }
+
+void draw_obj_with_texture(vector<glm::vec3> &vertices,
+  vector<glm::vec3> &normals, vector<glm::vec2> &textures,
+  const char * texture_file) {
+  GLuint tex2d = load_texture(texture_file);
+  glEnable(GL_TEXTURE_2D);
+  glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  glBindTexture(GL_TEXTURE_2D, tex2d);
+  //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, tex2d);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  /*
+  glColor3f(1.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
+  glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0f, 0.0f);
+  glTexCoord2f(1.0f, 0.0f); glVertex2f(1.0f, 0.0f);
+  glTexCoord2f(1.0f, 1.0f); glVertex2f(1.0f, 1.0f);
+  glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0f, 1.0f);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+  */
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+  //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  //glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
+  glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_NORMAL_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+  glDisable(GL_TEXTURE_2D);
+}
+
+GLuint tex_2d = -1;
+void draw_plane() {
+  vector<glm::vec3> vertices, normals;
+  vector<glm::vec2> textures;
+  vertices.push_back(glm::vec3(-1, -1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(0, 0));
+  vertices.push_back(glm::vec3(1, -1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(1, 0));
+  vertices.push_back(glm::vec3(1, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(1, 1));
+
+  vertices.push_back(glm::vec3(1, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(1, 1));
+  vertices.push_back(glm::vec3(-1, 1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(0, 1));
+  vertices.push_back(glm::vec3(-1, -1, 0));
+  normals.push_back(glm::vec3(0, 1, 0));
+  textures.push_back(glm::vec2(0, 0));
+
+  draw_obj_with_texture(vertices, normals, textures, "textures/rug.jpg");
+  /*
+  glEnable(GL_TEXTURE_2D);
+  if (tex_2d == -1) {
+    tex_2d = load_texture("textures/ocean.BMP");
+    if( 0 == tex_2d ) {
+    	cout << "SOIL loading error: " << SOIL_last_result() << "\n";
+    	exit(1);
+    }
+   }
+   glBindTexture(GL_TEXTURE_2D, tex_2d);
+   glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
+
+    glColor3f (1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+
+                       glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0f, 0.0f);
+                       glTexCoord2f(1.0f, 0.0f); glVertex2f(1.0f, 0.0f);
+                       glTexCoord2f(1.0f, 1.0f); glVertex2f(1.0f, 1.0f);
+                       glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0f, 1.0f);
+
+     glEnd();   
+    glDisable(GL_TEXTURE_2D);
+    glFlush ();
+    glutSwapBuffers();
+*/
+}
+
 vector<glm::vec3> window_vertices, window_normals;
 void draw_window() {
   if (window_vertices.size() == 0) {
@@ -319,10 +420,57 @@ void init_cube(double width, double length, double height, double y_start, bool 
   }
 }
 
-void draw_cube(double width, double length, double height, double y_start, bool inverse_norm) {
+void draw_cube(double width, double length, double height, double y_start, bool inverse_norm, const char * texture_file) {
   vector<glm::vec3> vertices, normals;
+  vector<glm::vec2> textures;
   init_cube(width, length, height, y_start, inverse_norm, vertices, normals);
-  draw_obj(vertices,normals);
+  if (texture_file != NULL) {
+    //left
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+    //right
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+    //top
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 0));
+    //bottom
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(1, 0));
+    //near
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+    //far
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 1));
+    textures.push_back(glm::vec2(1, 1));
+
+    draw_obj_with_texture(vertices, normals, textures, texture_file);
+  }
+  draw_obj(vertices, normals);
 }
 
 vector<glm::vec3> barrel_vertices, barrel_normals;
@@ -739,20 +887,20 @@ void display() {
       draw_bench();
     } else if (obj -> type == arch) {
 	draw_arch();
-    }else if (obj -> type == cylinder) {
+    } else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
+    } else if (obj -> type == textured_cube) {
+	draw_cube(1, 1, 1, 0, true, "textures/rug2.jpg");
     } else if (obj -> type == cube) {
-            glutSolidCube(obj->size) ;
-          }
-          else if (obj -> type == sphere) {
-            const int tessel = 20 ;
-            glutSolidSphere(obj->size, tessel, tessel) ;
-          }
-          else if (obj -> type == teapot) {
-            glutSolidTeapot(obj->size) ;
-          }
-	  
-        }
-    
+        glutSolidCube(obj->size) ;
+    } else if (obj -> type == sphere) {
+        const int tessel = 20 ;
+        glutSolidSphere(obj->size, tessel, tessel) ;
+    } else if (obj -> type == plane) {
+	draw_plane();
+    } else if (obj -> type == teapot) {
+        glutSolidTeapot(obj->size) ;
+    } 
+  }   
         glutSwapBuffers();
 }
