@@ -202,9 +202,14 @@ void readfile(const char * filename) {
               else if (cmd == "bench") obj -> type = bench;
 	      else if (cmd == "arch") obj -> type = arch;
 	      else if (cmd == "window") obj -> type = window;
-	      else if (cmd == "glass") obj -> type = glass;
-	      else if (cmd == "barrel_vault") obj -> type = barrel_vault;
-	      else if (cmd == "textured_cube") obj -> type = textured_cube;
+	      else if (cmd == "glass") {
+		obj -> type = glass;
+		obj -> texture = textures[num_glass++ % 10];
+	      } else if (cmd == "barrel_vault") obj -> type = barrel_vault;
+	      else if (cmd == "textured_cube") {
+		obj -> type = textured_cube;
+		obj -> texture = carpet;
+	      }
 	  }
             ++numobjects ; 
           }

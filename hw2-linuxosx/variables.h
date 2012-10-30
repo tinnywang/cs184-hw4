@@ -41,8 +41,8 @@ static enum {view, scale} transop ; // which operation to transform
 enum shape {cube, sphere, teapot, pillar, room, cylinder, sword, arch, bench,
 	barrel_vault, window, glass, textured_cube} ;
 EXTERN float sx, sy ; // the scale in x and y
-enum texture {carpet_texture, glass_texture} ;
-EXTERN GLuint textures[2];
+EXTERN GLuint textures[10];
+EXTERN GLuint carpet;
 
 // Lighting parameter array, similar to that in the fragment shader
 const int numLights = 10 ; 
@@ -50,6 +50,7 @@ EXTERN GLfloat lightposn [4*numLights] ; // Light Positions
 EXTERN GLfloat lightcolor[4*numLights] ; // Light Colors
 EXTERN GLfloat lightransf[4*numLights] ; // Lights transformed by modelview
 EXTERN int numused ;                     // How many lights are used 
+EXTERN int num_glass;			 // How many glass panes
 
 // Materials (read from file) 
 // With multiple objects, these are colors for each.
@@ -76,6 +77,8 @@ EXTERN struct object {
   GLfloat specular[4] ;
   GLfloat emission[4] ; 
   GLfloat shininess ;
+  GLuint texture;
+  
   mat4 transform ; 
 } objects[maxobjects] ;
 

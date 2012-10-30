@@ -260,8 +260,17 @@ void init() {
   shininesscol = glGetUniformLocation(shaderprogram,"shininess") ;
   istex = glGetUniformLocation(shaderprogram, "istex");
 
-  textures[0] = load_texture("textures/carpet.jpg");
-  textures[1] = load_texture("textures/glass.jpg");
+  carpet = load_texture("textures/carpet.jpg");
+  textures[0] = load_texture("textures/glass.jpg");
+  textures[1] = load_texture("textures/glass2.jpg");
+  textures[2] = load_texture("textures/glass3.jpg");
+  textures[3] = load_texture("textures/glass4.jpg");
+  textures[4] = load_texture("textures/glass5.jpg");
+  textures[5] = load_texture("textures/glass6.jpg");
+  textures[6] = load_texture("textures/glass7.jpg");
+  textures[7] = load_texture("textures/glass8.jpg");
+  textures[8] = load_texture("textures/glass9.jpg");
+  textures[9] = load_texture("textures/glass10.jpg");
 }
 
 int main(int argc, char* argv[]) {

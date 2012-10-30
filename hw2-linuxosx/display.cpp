@@ -193,11 +193,11 @@ void draw_glass(GLuint texture) {
   if (glass_vertices.size() == 0) {
     glm::vec3 v1, v2, v3, v4, v5, normal;
     glm::vec2 t1, t2, t3, t4, t5;
-    v1 = glm::vec3(-1.75, 2, 0);
+    v1 = glm::vec3(-1.75, 1.9, 0);
     v2 = glm::vec3(0, 4, 0);
-    v3 = glm::vec3(1.75, 2, 0);
-    v4 = glm::vec3(1.75, -4, 0);
-    v5 = glm::vec3(-1.75, -4, 0);
+    v3 = glm::vec3(1.75, 1.9, 0);
+    v4 = glm::vec3(1.75, -3.9, 0);
+    v5 = glm::vec3(-1.75, -3.9, 0);
     normal = glm::vec3(0, 0, 1);
     t1 = glm::vec2(0, 0.9);
     t2 = glm::vec2(0.5, 1);
@@ -885,7 +885,7 @@ void display() {
     } else if (obj -> type == window) {
       draw_window();
     } else if (obj -> type == glass) {
-      draw_glass(textures[glass_texture]);
+      draw_glass(obj -> texture);
     } else if (obj -> type == bench) {
       draw_bench();
     } else if (obj -> type == arch) {
@@ -893,7 +893,7 @@ void display() {
     } else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == textured_cube) {
-	draw_cube(1, 1, 1, 0, true, textures[carpet_texture]);
+	draw_cube(1, 1, 1, 0, true, obj -> texture);
     } else if (obj -> type == cube) {
         glutSolidCube(obj->size) ;
     } else if (obj -> type == sphere) {
