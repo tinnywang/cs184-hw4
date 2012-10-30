@@ -12,7 +12,10 @@
 
 varying vec4 color ;
 varying vec3 mynormal ; 
-varying vec4 myvertex ; 
+varying vec4 myvertex ;
+
+uniform sampler2D tex;
+uniform bool istex;
 
 const int numLights = 10 ; 
 uniform bool enablelighting ; // are we lighting at all (global).
@@ -40,8 +43,10 @@ vec4 phongIllumination(vec3 normal, vec3 direction, vec3 halfAngle, vec4 lightco
 }
 
 void main (void) 
-{       
-    if (enablelighting) {       
+{
+    if (istex) {
+      gl_FragColor = texture2D(tex, gl_TexCoord[0].st);       
+    } else if (enablelighting) {       
         
         vec4 finalcolor = vec4(0, 0, 0, 0); 
 
@@ -69,6 +74,7 @@ void main (void)
 	}
 	finalcolor += (color * ambient) + emission;
         gl_FragColor = finalcolor;
+    } else {
+      gl_FragColor = color ;
     }
-    else gl_FragColor = color ; 
 }

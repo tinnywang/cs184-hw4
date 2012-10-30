@@ -4,7 +4,7 @@ CFLAGS = -g -DGL_GLEXT_PROTOTYPES -DOSX
 INCFLAGS = -I./glm-0.9.2.7 -I/usr/X11/include -I./include/
 LDFLAGS = -framework GLUT -framework OpenGL -L./osxlib/ \
 		-L"/System/Library/Frameworks/OpenGL.framework/Libraries" \
-		-lGL -lGLU -lm -lstdc++ -lfreeimage
+		-lGL -lGLU -lm -lstdc++ -lfreeimage -lSOIL
 else
 CFLAGS = -g -DGL_GLEXT_PROTOTYPES 
 INCFLAGS = -I./glm-0.9.2.7 -I./include/ -I/usr/X11R6/include -I/sw/include \

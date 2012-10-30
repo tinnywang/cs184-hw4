@@ -140,37 +140,42 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
 void draw_obj_with_texture(vector<glm::vec3> &vertices,
   vector<glm::vec3> &normals, vector<glm::vec2> &textures,
   const char * texture_file) {
+  glUniform1i(enablelighting, false);
+  glUniform1i(istex, true);
+
   GLuint tex2d = load_texture(texture_file);
-  glEnable(GL_TEXTURE_2D);
   glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+ 
   glBindTexture(GL_TEXTURE_2D, tex2d);
-  //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, tex2d);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  /*
-  glColor3f(1.0, 1.0, 1.0);
-  glBegin(GL_POLYGON);
-  glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0f, 0.0f);
-  glTexCoord2f(1.0f, 0.0f); glVertex2f(1.0f, 0.0f);
-  glTexCoord2f(1.0f, 1.0f); glVertex2f(1.0f, 1.0f);
-  glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0f, 1.0f);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  */
+
+  GLint texsampler;
+  texsampler = glGetUniformLocation(shaderprogram, "tex");
+  glUniform1i(texsampler, 0);
+  
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, tex2d);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
+  
   glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  //glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
   glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
+  
+  glEnableClientState(GL_NORMAL_ARRAY);
   glNormalPointer(GL_FLOAT, 0, &normals[0]);
+  
   glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_NORMAL_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   glDisable(GL_TEXTURE_2D);
+
+  glUniform1i(enablelighting, true);
+  glUniform1i(istex, false);
 }
 
 GLuint tex_2d = -1;
@@ -197,7 +202,7 @@ void draw_plane() {
   normals.push_back(glm::vec3(0, 1, 0));
   textures.push_back(glm::vec2(0, 0));
 
-  draw_obj_with_texture(vertices, normals, textures, "textures/rug.jpg");
+  draw_obj_with_texture(vertices, normals, textures, "textures/ocean.BMP");
   /*
   glEnable(GL_TEXTURE_2D);
   if (tex_2d == -1) {
@@ -890,7 +895,7 @@ void display() {
     } else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == textured_cube) {
-	draw_cube(1, 1, 1, 0, true, "textures/rug2.jpg");
+	draw_cube(1, 1, 1, 0, true, "textures/carpet2.jpg");
     } else if (obj -> type == cube) {
         glutSolidCube(obj->size) ;
     } else if (obj -> type == sphere) {
