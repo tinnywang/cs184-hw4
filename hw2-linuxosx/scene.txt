@@ -304,7 +304,7 @@ popTransform
 #aisle
 pushTransform
 diffuse 1 0 0 1
-translate 0 -17.5 0
+translate 0 -18 0
 scale 10 1 100
 textured_cube 1
 diffuse .48 .5 .56 1
