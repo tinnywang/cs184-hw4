@@ -504,16 +504,16 @@ void draw_barrel_vault(double outer_radius, double inner_radius, double depth) {
       glm::vec3 v8 = outer_far * Transform::rotate(i+10, z_axis);
 
       // near faces
-      barrel_vertices.push_back(v1);
-      barrel_vertices.push_back(v2);
       barrel_vertices.push_back(v4);
+      barrel_vertices.push_back(v2);
+      barrel_vertices.push_back(v1);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
 
-      barrel_vertices.push_back(v1);
-      barrel_vertices.push_back(v4);
       barrel_vertices.push_back(v3);
+      barrel_vertices.push_back(v4);
+      barrel_vertices.push_back(v1);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
@@ -550,23 +550,23 @@ void draw_barrel_vault(double outer_radius, double inner_radius, double depth) {
       barrel_normals.push_back(norm2);
 
       // outer face
-      barrel_vertices.push_back(v2);
       barrel_vertices.push_back(v8);
       barrel_vertices.push_back(v4);
+      barrel_vertices.push_back(v2);
       barrel_normals.push_back(norm1);
       barrel_normals.push_back(norm2);
       barrel_normals.push_back(norm2);
-      barrel_vertices.push_back(v2);
-      barrel_vertices.push_back(v6);
       barrel_vertices.push_back(v8);
+      barrel_vertices.push_back(v6);
+      barrel_vertices.push_back(v2);
       barrel_normals.push_back(norm1);
       barrel_normals.push_back(norm1);
       barrel_normals.push_back(norm2);
 
       // near cap
-      barrel_vertices.push_back(v3);
-      barrel_vertices.push_back(v1);
       barrel_vertices.push_back(center_near);
+      barrel_vertices.push_back(v1);
+      barrel_vertices.push_back(v3);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
       barrel_normals.push_back(z_axis);
@@ -652,9 +652,9 @@ void draw_room(double width, double length, double height) {
     glm::vec3 v8 = glm::vec3(-width/2, height/2, length/2);
 
     // bottom face
-    room_vertices.push_back(v1);
-    room_vertices.push_back(v2);
     room_vertices.push_back(v3);
+    room_vertices.push_back(v2);
+    room_vertices.push_back(v1);
     room_vertices.push_back(v4);
     room_normals.push_back(glm::vec3(0, 1, 0));
     room_normals.push_back(glm::vec3(0, 1, 0));
@@ -662,29 +662,29 @@ void draw_room(double width, double length, double height) {
     room_normals.push_back(glm::vec3(0, 1, 0));
 
     // right face
-    room_vertices.push_back(v1);
     room_vertices.push_back(v5);
     room_vertices.push_back(v6);
     room_vertices.push_back(v2);
+    room_vertices.push_back(v1);
     room_normals.push_back(glm::vec3(-1, 0, 0));
     room_normals.push_back(glm::vec3(-1, 0, 0));
     room_normals.push_back(glm::vec3(-1, 0, 0));
     room_normals.push_back(glm::vec3(-1, 0, 0));
 
     // left face
-    room_vertices.push_back(v4);
-    room_vertices.push_back(v3);
-    room_vertices.push_back(v7);
     room_vertices.push_back(v8);
+    room_vertices.push_back(v7);
+    room_vertices.push_back(v3);
+    room_vertices.push_back(v4);
     room_normals.push_back(glm::vec3(1, 0, 0));
     room_normals.push_back(glm::vec3(1, 0, 0));
     room_normals.push_back(glm::vec3(1, 0, 0));
     room_normals.push_back(glm::vec3(1, 0, 0));
 
     // near face
-    room_vertices.push_back(v1);
-    room_vertices.push_back(v5);
     room_vertices.push_back(v8);
+    room_vertices.push_back(v5);
+    room_vertices.push_back(v1);
     room_vertices.push_back(v4);
     room_normals.push_back(glm::vec3(0, 0, -1));
     room_normals.push_back(glm::vec3(0, 0, -1));
