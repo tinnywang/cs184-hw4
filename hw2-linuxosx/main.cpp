@@ -198,7 +198,10 @@ void init() {
   specularcol = glGetUniformLocation(shaderprogram,"specular") ;       
   emissioncol = glGetUniformLocation(shaderprogram,"emission") ;       
   shininesscol = glGetUniformLocation(shaderprogram,"shininess") ;
-  istex = glGetUniformLocation(shaderprogram, "istex");       
+  istex = glGetUniformLocation(shaderprogram, "istex");
+
+  textures[0] = load_texture("textures/carpet.jpg");
+  textures[1] = load_texture("textures/glass.jpg");
 }
 
 int main(int argc, char* argv[]) {

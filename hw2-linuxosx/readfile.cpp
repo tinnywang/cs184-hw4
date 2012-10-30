@@ -162,7 +162,7 @@ void readfile(const char * filename) {
         // you can get a sense of how this works.  
         else if (cmd == "sphere" || cmd == "cube" || cmd == "teapot" || cmd == "pillar"
                  || cmd == "room" || cmd == "cylinder" || cmd == "sword" || cmd == "arch"
-                 || cmd == "bench" || cmd == "barrel_vault" || cmd == "window" || cmd == "glass" || cmd == "textured_cube" || cmd == "plane") {
+                 || cmd == "bench" || cmd == "barrel_vault" || cmd == "window" || cmd == "glass" || cmd == "textured_cube") {
           if (numobjects == maxobjects) // No more objects 
             cerr << "Reached Maximum Number of Objects " << numobjects << " Will ignore further objects\n" ; 
           else {
@@ -205,7 +205,6 @@ void readfile(const char * filename) {
 	      else if (cmd == "glass") obj -> type = glass;
 	      else if (cmd == "barrel_vault") obj -> type = barrel_vault;
 	      else if (cmd == "textured_cube") obj -> type = textured_cube;
-	      else if (cmd == "plane") obj -> type = plane;
 	  }
             ++numobjects ; 
           }
