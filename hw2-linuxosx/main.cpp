@@ -67,10 +67,14 @@ void saveScreenshot(string fname) {
 void printHelp() {
   std::cout << "\npress 'h' to print this message again.\n" 
     << "press '+' or '-' to change the amount of rotation that\noccurs with each arrow press.\n" 
-    << "press 'i' to run image grader test cases\n"
     << "press 'g' to switch between using glm::lookAt and glm::Perspective or your own LookAt.\n"       
     << "press 'r' to reset the transformations.\n"
-    << "press 'v' 't' 's' to do view [default], translate, scale.\n"
+    << "press 'v' 's' to do view [default], scale.\n"
+    << "press the arrow keys to move around the scene.\n"
+    << "move the mouse to look around.\n"
+    << "press 'z' to zoom in, 'x' to zoom out.\n"
+    << "press 'o' to toggle outlines.\n"
+    << "press 'l' to toggle fragment shader.\n"
     << "press ESC to quit.\n" ;      
 }
 
@@ -215,6 +219,15 @@ void keyboard(unsigned char key, int x, int y) {
       }
       reshape(w,h) ;       
     break;
+    case 'o':
+      outline = !outline;
+      glutPostRedisplay();
+    break;
+    case 'l':
+      celShade = !celShade;
+      glUniform1i(isCelShaded, celShade); 
+      glutPostRedisplay();
+    break;
   }
   glutPostRedisplay();
 }
@@ -259,6 +272,7 @@ void init() {
   emissioncol = glGetUniformLocation(shaderprogram,"emission") ;       
   shininesscol = glGetUniformLocation(shaderprogram,"shininess") ;
   istex = glGetUniformLocation(shaderprogram, "istex");
+  isCelShaded = glGetUniformLocation(shaderprogram, "isCelShaded");
 
   carpet = load_texture("textures/carpet.jpg");
   textures[0] = load_texture("textures/glass.jpg");
@@ -271,6 +285,9 @@ void init() {
   textures[7] = load_texture("textures/glass8.jpg");
   textures[8] = load_texture("textures/glass9.jpg");
   textures[9] = load_texture("textures/glass10.jpg");
+
+  outline = true;
+  celShade = false; // use phong by default
 }
 
 int main(int argc, char* argv[]) {

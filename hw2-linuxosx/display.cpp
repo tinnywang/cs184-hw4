@@ -701,10 +701,10 @@ void draw_room(double width, double length, double height) {
     room_normals.push_back(glm::vec3(0, 0, 1));
     room_normals.push_back(glm::vec3(0, 0, 1));
 
-    glm::vec3 vault1 = glm::vec3(-width/4, height/2, length/2);
-    glm::vec3 vault2 = glm::vec3(width/4, height/2, length/2);
-    glm::vec3 vault3 = glm::vec3(-width/4, height/2, -length/2);
-    glm::vec3 vault4 = glm::vec3(width/4, height/2, -length/2);
+    glm::vec3 vault1 = glm::vec3(-width/4 + 1.5, height/2, length/2);
+    glm::vec3 vault2 = glm::vec3(width/4 - 1.5, height/2, length/2);
+    glm::vec3 vault3 = glm::vec3(-width/4 + 1.5, height/2, -length/2);
+    glm::vec3 vault4 = glm::vec3(width/4 - 1.5, height/2, -length/2);
 
     // left half of top face
     room_vertices.push_back(v8);
@@ -772,6 +772,39 @@ void transformvec (const GLfloat input[4], GLfloat output[4]) {
   }
 }
 
+void draw(object * obj) {
+  if (obj -> type == pillar) {
+    draw_pillar();
+  } else if (obj -> type == room) {
+    draw_room(obj->width, obj->length, obj->height);
+  } else if (obj -> type == barrel_vault) {
+    draw_barrel_vault(obj->outer_radius, obj->inner_radius, obj->depth);
+  } else if (obj -> type == sword) {
+    draw_sword();
+  } else if (obj -> type == window) {
+    draw_window();
+  } else if (obj -> type == glass) {
+    draw_glass(obj -> texture);
+  } else if (obj -> type == bench) {
+    draw_bench();
+  } else if (obj -> type == arch) {
+    draw_arch();
+  } else if (obj -> type == crystal) {
+    draw_crystal();
+  } else if (obj -> type == cylinder) {
+    draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
+  } else if (obj -> type == textured_cube) {
+    draw_cube(1, 1, 1, 0, true, obj -> texture);
+  } else if (obj -> type == cube) {
+    glutSolidCube(obj->size) ;
+  } else if (obj -> type == sphere) {
+    const int tessel = 20 ;
+    glutSolidSphere(obj->size, tessel, tessel) ;
+  } else if (obj -> type == teapot) {
+    glutSolidTeapot(obj->size) ;
+  }
+}
+ 
 void display() {
 	glClearColor(0, 0, 1, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -844,9 +877,8 @@ void display() {
             glUniform4fv(emissioncol, 1, obj -> emission);
             glUniform1f(shininesscol, obj -> shininess);
           }
-
+	if (outline) {
 	  // Draw the outline of objects
-	  /*
 	  glEnable(GL_CULL_FACE);
 	  glCullFace(GL_FRONT);
 	  glEnable(GL_LINE_SMOOTH);
@@ -854,64 +886,15 @@ void display() {
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	  glColor3f(0, 0, 0);
 	  glUniform1i(enablelighting, false);
-	  
 
-          // Actually draw the object
-          // We provide the actual glut drawing functions for you. 
-	  if (obj -> type == pillar) {
-	    draw_pillar();
-	  } else if (obj -> type == room) {
-      draw_room(obj->width, obj->length, obj->height);
-	  } else if (obj -> type == cube) {
-            glutSolidCube(obj->size) ; 
-          }
-          else if (obj -> type == sphere) {
-            const int tessel = 20 ; 
-            glutSolidSphere(obj->size, tessel, tessel) ; 
-          }
-          else if (obj -> type == teapot) {
-	    // MUST do this because teapot is inverted.
-	    glCullFace(GL_BACK);
-            glutSolidTeapot(obj->size) ;
-          }
-
+          draw(obj);
 	  // Undo wireframe rendering.
 	  glDisable(GL_CULL_FACE);
 	  glDisable(GL_LINE_SMOOTH);
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	  glUniform1i(enablelighting, true);
-	  */    
-	  // Redraw the object so that it can be cel shaded.
-	  if (obj -> type == pillar) {
-	    draw_pillar();
-	  } else if (obj -> type == room) {
-        draw_room(obj->width, obj->length, obj->height);
-  	} else if (obj -> type == barrel_vault) {
-	draw_barrel_vault(obj->outer_radius, obj->inner_radius, obj->depth);
-	} else if (obj -> type == sword) {
-        draw_sword();
-    } else if (obj -> type == window) {
-      draw_window();
-    } else if (obj -> type == glass) {
-      draw_glass(obj -> texture);
-    } else if (obj -> type == bench) {
-      draw_bench();
-    } else if (obj -> type == arch) {
-	draw_arch();
-    } else if (obj -> type == crystal) {
-	draw_crystal();
-    } else if (obj -> type == cylinder) {
-        draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
-    } else if (obj -> type == textured_cube) {
-	draw_cube(1, 1, 1, 0, true, obj -> texture);
-    } else if (obj -> type == cube) {
-        glutSolidCube(obj->size) ;
-    } else if (obj -> type == sphere) {
-        const int tessel = 20 ;
-        glutSolidSphere(obj->size, tessel, tessel) ;
-    } else if (obj -> type == teapot) {
-        glutSolidTeapot(obj->size) ;
-    } 
+	}    
+	draw(obj);
   }   
         glutSwapBuffers();
 }

@@ -30,7 +30,7 @@ popTransform
 
 pushTransform
   translate 0 17.5 0
-  barrel_vault 28 25 100
+  barrel_vault 26.5 23.5 100
 popTransform
 
 pushTransform
