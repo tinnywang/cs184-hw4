@@ -279,16 +279,15 @@ void draw_bench() {
 }
 
 void init_cube(double width, double length, double height, double y_start, bool inverse_norm, vector<glm::vec3> & vertices, vector<glm::vec3> & normals) {
-  //left
-  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
-  
-  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
-  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
-  
+  //left  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
     normals.push_back(glm::vec3(1,0,0));
     normals.push_back(glm::vec3(1,0,0));
     normals.push_back(glm::vec3(1,0,0));
@@ -296,6 +295,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(1,0,0));
     normals.push_back(glm::vec3(1,0,0));
   } else {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
     normals.push_back(-glm::vec3(1,0,0));
     normals.push_back(-glm::vec3(1,0,0));
     normals.push_back(-glm::vec3(1,0,0));
@@ -303,16 +309,16 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(-glm::vec3(1,0,0));
     normals.push_back(-glm::vec3(1,0,0));
   }
+  
   //right
-  vertices.push_back(glm::vec3(width/2,y_start,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
-  
-  vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
-  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
-  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
     normals.push_back(glm::vec3(-1,0,0));
     normals.push_back(glm::vec3(-1,0,0));
     normals.push_back(glm::vec3(-1,0,0));
@@ -320,6 +326,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(-1,0,0));
     normals.push_back(glm::vec3(-1,0,0));
   } else {
+    vertices.push_back(glm::vec3(width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
     normals.push_back(-glm::vec3(-1,0,0));
     normals.push_back(-glm::vec3(-1,0,0));
     normals.push_back(-glm::vec3(-1,0,0));
@@ -327,16 +340,16 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(-glm::vec3(-1,0,0));
     normals.push_back(-glm::vec3(-1,0,0));
   }
+  
   //top
-  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
-  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
-  
-  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));  
-  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
-  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
     normals.push_back(glm::vec3(0,-1,0));
     normals.push_back(glm::vec3(0,-1,0));
     normals.push_back(glm::vec3(0,-1,0));
@@ -344,6 +357,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(0,-1,0));
     normals.push_back(glm::vec3(0,-1,0));
   } else {
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2)); 
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2)); 
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
     normals.push_back(-glm::vec3(0,-1,0));
     normals.push_back(-glm::vec3(0,-1,0));
     normals.push_back(-glm::vec3(0,-1,0));
@@ -353,15 +373,14 @@ void init_cube(double width, double length, double height, double y_start, bool 
   }
   
   //bottom
-  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
-  
-  vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
-  vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
-  vertices.push_back(glm::vec3(width/2,y_start,length/2));
-  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start,length/2));
     normals.push_back(glm::vec3(0,1,0));
     normals.push_back(glm::vec3(0,1,0));
     normals.push_back(glm::vec3(0,1,0));
@@ -369,6 +388,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(0,1,0));
     normals.push_back(glm::vec3(0,1,0));
   } else {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2)); 
+    vertices.push_back(glm::vec3(width/2,y_start,length/2)); 
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
     normals.push_back(-glm::vec3(0,1,0));
     normals.push_back(-glm::vec3(0,1,0));
     normals.push_back(-glm::vec3(0,1,0));
@@ -378,15 +404,14 @@ void init_cube(double width, double length, double height, double y_start, bool 
   }
   
   //near
-  vertices.push_back(glm::vec3(-width/2,y_start,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
-  vertices.push_back(glm::vec3(width/2,y_start,length/2));
-  
-  vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
-  vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));  
-  vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
-  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
     normals.push_back(glm::vec3(0,0,-1));
     normals.push_back(glm::vec3(0,0,-1));
     normals.push_back(glm::vec3(0,0,-1));
@@ -394,6 +419,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(0,0,-1));
     normals.push_back(glm::vec3(0,0,-1));
   } else {
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,length/2));  
     normals.push_back(-glm::vec3(0,0,-1));
     normals.push_back(-glm::vec3(0,0,-1));
     normals.push_back(-glm::vec3(0,0,-1));
@@ -401,16 +433,16 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(-glm::vec3(0,0,-1));
     normals.push_back(-glm::vec3(0,0,-1));
   }
+  
   //far
-  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
-  vertices.push_back(glm::vec3(width/2,y_start,-length/2));
-  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
-  
-  vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
-  vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
-  vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));  
-  
   if (inverse_norm) {
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));  
     normals.push_back(glm::vec3(0,0,1));
     normals.push_back(glm::vec3(0,0,1));
     normals.push_back(glm::vec3(0,0,1));
@@ -418,6 +450,13 @@ void init_cube(double width, double length, double height, double y_start, bool 
     normals.push_back(glm::vec3(0,0,1));
     normals.push_back(glm::vec3(0,0,1));
   } else {
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
+    vertices.push_back(glm::vec3(width/2,y_start,-length/2));
+
+    vertices.push_back(glm::vec3(-width/2,y_start,-length/2));  
+    vertices.push_back(glm::vec3(-width/2,y_start+height,-length/2));  
+    vertices.push_back(glm::vec3(width/2,y_start+height,-length/2));
     normals.push_back(-glm::vec3(0,0,1));
     normals.push_back(-glm::vec3(0,0,1));
     normals.push_back(-glm::vec3(0,0,1));
