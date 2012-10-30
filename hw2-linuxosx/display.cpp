@@ -28,6 +28,10 @@ GLuint load_texture(const char * filename) {
     SOIL_LOAD_AUTO,
     SOIL_CREATE_NEW_ID,
     SOIL_FLAG_POWER_OF_TWO| SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_INVERT_Y);
+  if (tex2d == 0) {
+	cout << SOIL_last_result() << "\n";
+	exit(1);
+  }
   return tex2d;
 }
 
@@ -51,7 +55,6 @@ void load_obj(const char * filename, vector<glm::vec3> &face_vertices, vector<gl
 	ss >> x >> y >> z;
 	glm::vec3 vertex = glm::vec3(x, y, z);
 	vertices.push_back(vertex);
-	//cout << x << " " << y << " " << z << "\n";
       // vertex normal
       } else if (cmd.compare("vn") == 0) {
 	float x, y, z;
@@ -138,15 +141,12 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
 }
 
 void draw_obj_with_texture(vector<glm::vec3> &vertices,
-  vector<glm::vec3> &normals, vector<glm::vec2> &textures,
-  const char * texture_file) {
+  vector<glm::vec3> &normals, vector<glm::vec2> &textures, GLuint texture) {
   glUniform1i(enablelighting, false);
   glUniform1i(istex, true);
 
-  GLuint tex2d = load_texture(texture_file);
-  glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
- 
-  glBindTexture(GL_TEXTURE_2D, tex2d);
+  glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]); 
+  glBindTexture(GL_TEXTURE_2D, texture);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -157,7 +157,7 @@ void draw_obj_with_texture(vector<glm::vec3> &vertices,
   glUniform1i(texsampler, 0);
   
   glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, tex2d);
+  glBindTexture(GL_TEXTURE_2D, texture);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]);
   
@@ -178,60 +178,6 @@ void draw_obj_with_texture(vector<glm::vec3> &vertices,
   glUniform1i(istex, false);
 }
 
-GLuint tex_2d = -1;
-void draw_plane() {
-  vector<glm::vec3> vertices, normals;
-  vector<glm::vec2> textures;
-  vertices.push_back(glm::vec3(-1, -1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(0, 0));
-  vertices.push_back(glm::vec3(1, -1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(1, 0));
-  vertices.push_back(glm::vec3(1, 1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(1, 1));
-
-  vertices.push_back(glm::vec3(1, 1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(1, 1));
-  vertices.push_back(glm::vec3(-1, 1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(0, 1));
-  vertices.push_back(glm::vec3(-1, -1, 0));
-  normals.push_back(glm::vec3(0, 1, 0));
-  textures.push_back(glm::vec2(0, 0));
-
-  draw_obj_with_texture(vertices, normals, textures, "textures/ocean.BMP");
-  /*
-  glEnable(GL_TEXTURE_2D);
-  if (tex_2d == -1) {
-    tex_2d = load_texture("textures/ocean.BMP");
-    if( 0 == tex_2d ) {
-    	cout << "SOIL loading error: " << SOIL_last_result() << "\n";
-    	exit(1);
-    }
-   }
-   glBindTexture(GL_TEXTURE_2D, tex_2d);
-   glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
-
-    glColor3f (1.0,1.0,1.0);
-    glBegin(GL_POLYGON);
-
-                       glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0f, 0.0f);
-                       glTexCoord2f(1.0f, 0.0f); glVertex2f(1.0f, 0.0f);
-                       glTexCoord2f(1.0f, 1.0f); glVertex2f(1.0f, 1.0f);
-                       glTexCoord2f(0.0f, 1.0f); glVertex2f(0.0f, 1.0f);
-
-     glEnd();   
-    glDisable(GL_TEXTURE_2D);
-    glFlush ();
-    glutSwapBuffers();
-*/
-}
-
 vector<glm::vec3> window_vertices, window_normals;
 void draw_window() {
   if (window_vertices.size() == 0) {
@@ -240,9 +186,31 @@ void draw_window() {
   draw_obj(window_vertices, window_normals);
 }
 
-vector<glm::vec3> glass_vertices, glass_normals;
-void draw_glass() {
+vector<glm::vec3> glass_vertices, glass_normals, glass_textures;
+void draw_glass(/*GLuint texture*/) {
+
   if (glass_vertices.size() == 0) {
+/*
+    glm::vec3 v1, v2, v3, v4, v5, normal;
+    glm::vec2 t1, t2, t3, t4, t5;
+    v1 = glm::vec3(-1.75, 2, 0);
+    v2 = glm::vec3(0, 4, 0);
+    v3 = glm::vec3(1.75, 2, 0);
+    v4 = glm::vec3(1.75, -4, 0);
+    v5 = glm::vec3(-1.75, -4, 0);
+    normal = glm::vec3(0, 0, 1);
+    t1 = glm::vec2(
+
+    glass_vertices.push(v1);
+    glass_vertices.push(v2);
+    glass_vertices.push(v3);
+    glass_normals.push(normal);
+    glass_normals.push(normal);
+    glass_normals.push(normal);
+    glass_textures
+*/
+
+
     load_obj("glass.obj", glass_vertices, glass_normals);
   }
   draw_obj(glass_vertices, glass_normals);
@@ -425,11 +393,11 @@ void init_cube(double width, double length, double height, double y_start, bool 
   }
 }
 
-void draw_cube(double width, double length, double height, double y_start, bool inverse_norm, const char * texture_file) {
+void draw_cube(double width, double length, double height, double y_start, bool inverse_norm, GLuint texture_file) {
   vector<glm::vec3> vertices, normals;
   vector<glm::vec2> textures;
   init_cube(width, length, height, y_start, inverse_norm, vertices, normals);
-  if (texture_file != NULL) {
+  if (texture_file != -1) {
     //left
     textures.push_back(glm::vec2(1, 0));
     textures.push_back(glm::vec2(0, 0));
@@ -639,7 +607,6 @@ void draw_cylinder(double top_radius, double bottom_radius, double height, doubl
 
 vector <glm::vec3> room_vertices, room_normals;
 void draw_room(double width, double length, double height) {
-  //draw_cube(width, length, height, -height/2, true);
   if (room_vertices.size() == 0) {
     glm::vec3 v1 = glm::vec3(width/2, -height/2, length/2);
     glm::vec3 v2 = glm::vec3(width/2, -height/2, -length/2);
@@ -895,14 +862,12 @@ void display() {
     } else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == textured_cube) {
-	draw_cube(1, 1, 1, 0, true, "textures/carpet2.jpg");
+	draw_cube(1, 1, 1, 0, true, textures[carpet_texture]);
     } else if (obj -> type == cube) {
         glutSolidCube(obj->size) ;
     } else if (obj -> type == sphere) {
         const int tessel = 20 ;
         glutSolidSphere(obj->size, tessel, tessel) ;
-    } else if (obj -> type == plane) {
-	draw_plane();
     } else if (obj -> type == teapot) {
         glutSolidTeapot(obj->size) ;
     } 
