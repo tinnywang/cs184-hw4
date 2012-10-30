@@ -186,11 +186,11 @@ void draw_window() {
   draw_obj(window_vertices, window_normals);
 }
 
-vector<glm::vec3> glass_vertices, glass_normals, glass_textures;
-void draw_glass(/*GLuint texture*/) {
+vector<glm::vec3> glass_vertices, glass_normals;
+vector<glm::vec2> glass_textures;
+void draw_glass(GLuint texture) {
 
   if (glass_vertices.size() == 0) {
-/*
     glm::vec3 v1, v2, v3, v4, v5, normal;
     glm::vec2 t1, t2, t3, t4, t5;
     v1 = glm::vec3(-1.75, 2, 0);
@@ -199,21 +199,47 @@ void draw_glass(/*GLuint texture*/) {
     v4 = glm::vec3(1.75, -4, 0);
     v5 = glm::vec3(-1.75, -4, 0);
     normal = glm::vec3(0, 0, 1);
-    t1 = glm::vec2(
+    t1 = glm::vec2(0, 0.9);
+    t2 = glm::vec2(0.5, 1);
+    t3 = glm::vec2(1, 0.9);
+    t4 = glm::vec2(1, 0);
+    t5 = glm::vec2(0, 0);
 
-    glass_vertices.push(v1);
-    glass_vertices.push(v2);
-    glass_vertices.push(v3);
-    glass_normals.push(normal);
-    glass_normals.push(normal);
-    glass_normals.push(normal);
-    glass_textures
-*/
+    for (int i = 0; i < 2; i++) {
+      glass_vertices.push_back(v1);
+      glass_vertices.push_back(v2);
+      glass_vertices.push_back(v3);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_textures.push_back(t1);
+      glass_textures.push_back(t2);
+      glass_textures.push_back(t3);
 
+      glass_vertices.push_back(v5);
+      glass_vertices.push_back(v1);
+      glass_vertices.push_back(v3);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_textures.push_back(t5);
+      glass_textures.push_back(t1);
+      glass_textures.push_back(t3);
 
-    load_obj("glass.obj", glass_vertices, glass_normals);
+      glass_vertices.push_back(v5);
+      glass_vertices.push_back(v3);
+      glass_vertices.push_back(v4);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_textures.push_back(t5);
+      glass_textures.push_back(t3);
+      glass_textures.push_back(t4);
+
+      normal *= -1;
+    }
   }
-  draw_obj(glass_vertices, glass_normals);
+  draw_obj_with_texture(glass_vertices, glass_normals, glass_textures, texture);
 }
 
 void draw_claptrap() {
@@ -399,47 +425,47 @@ void draw_cube(double width, double length, double height, double y_start, bool 
   init_cube(width, length, height, y_start, inverse_norm, vertices, normals);
   if (texture_file != -1) {
     //left
-    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(8, 0));
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(8, 8));
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
     //right
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 0));
-    textures.push_back(glm::vec2(1, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 0));
+    textures.push_back(glm::vec2(8, 0));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
     //top
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
-    textures.push_back(glm::vec2(1, 1));
-    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
+    textures.push_back(glm::vec2(8, 8));
+    textures.push_back(glm::vec2(8, 0));
     textures.push_back(glm::vec2(0, 0));
     //bottom
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(1, 1));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(8, 8));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(8, 0));
     //near
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(1, 1));
-    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(8, 8));
+    textures.push_back(glm::vec2(8, 0));
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
     //far
-    textures.push_back(glm::vec2(1, 0));
+    textures.push_back(glm::vec2(8, 0));
     textures.push_back(glm::vec2(0, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 0));
-    textures.push_back(glm::vec2(0, 1));
-    textures.push_back(glm::vec2(1, 1));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 0));
+    textures.push_back(glm::vec2(0, 8));
+    textures.push_back(glm::vec2(8, 8));
 
     draw_obj_with_texture(vertices, normals, textures, texture_file);
   }
@@ -859,7 +885,7 @@ void display() {
     } else if (obj -> type == window) {
       draw_window();
     } else if (obj -> type == glass) {
-      draw_glass();
+      draw_glass(textures[glass_texture]);
     } else if (obj -> type == bench) {
       draw_bench();
     } else if (obj -> type == arch) {
