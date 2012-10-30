@@ -88,6 +88,66 @@ void drag(int x, int y) {
   }
 }
 
+bool up_direction = true;
+bool slow = true;
+double init_increment = .2;
+double increment = init_increment;
+int counter = 0;
+bool waiting = false;
+void animation(void) {
+  if (waiting) {
+    if (counter == 100000) {
+      waiting = false;
+    } else {
+      counter++;
+    }
+    return;
+  }
+  if (sword_move >= 3) {
+    if (counter != 100000) {
+      waiting = true;
+      return;
+    } else {
+      counter = 0;
+    }
+    up_direction = false;
+    slow = false;
+  } else if (sword_move <= -3) {
+    if (counter != 100000) {
+      waiting = true;
+      return;
+    } else {
+      counter = 0;
+    }
+    up_direction = true;
+    slow = false;
+  }
+  if (up_direction) {
+    sword_move+=increment;
+    if (slow) {
+      increment = increment / 1.06;
+    } else {
+      increment = increment * 1.06;
+    }
+  } else {
+    sword_move-=increment;
+    if (slow) {
+      increment = increment / 1.06;
+    } else {
+      increment = increment * 1.06;
+    }
+  }
+  if (sword_move < 0 && up_direction == false && !slow) {
+    increment = init_increment;
+    slow = true;
+  }
+  if (sword_move > 0 && up_direction == true && !slow) {
+    increment = init_increment;
+    slow = true;
+  }
+  glutPostRedisplay();
+}
+
 // Mouse motion.  You need to respond to left clicks (to add points on curve) 
 // and right clicks (to delete points on curve) 
 void mouse(int button, int state, int x, int y) {
@@ -224,7 +284,7 @@ int main(int argc, char* argv[]) {
   glutReshapeFunc(reshape);
   glutReshapeWindow(w, h);
   glutMotionFunc(drag);	
-
+  glutIdleFunc(animation);
 
   if (argc > 2) {
     allowGrader = true;

@@ -798,7 +798,12 @@ void display() {
           // Set up the object transformations 
           // And pass in the appropriate material properties
 	    mat4 transform = obj -> transform;
-	    glLoadMatrixf(&glm::transpose(transform * transf)[0][0]);
+	    if (obj -> type == sword) {
+        mat4 transf_new = Transform::translate(0, sword_move,0) * transf;
+        glLoadMatrixf(&glm::transpose(transform * transf_new)[0][0]);
+      } else {
+	      glLoadMatrixf(&glm::transpose(transform * transf)[0][0]);
+      }
 	    glUniform4fv(ambientcol, 1, obj -> ambient);
             glUniform4fv(diffusecol, 1, obj -> diffuse);
             glUniform4fv(specularcol, 1, obj -> specular);

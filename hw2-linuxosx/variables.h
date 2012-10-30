@@ -17,6 +17,7 @@ EXTERN int amount; // The amount of rotation for each arrow press
 EXTERN vec3 eye; // The (regularly updated) vector coordinates of the eye 
 EXTERN vec3 up;  // The (regularly updated) vector coordinates of the up 
 EXTERN vec3 center;
+EXTERN double sword_move;
 
 #ifdef MAINPROGRAM 
 vec3 eyeinit(0.0,0.0,5.0) ; // Initial eye position, also for resets
@@ -25,7 +26,6 @@ vec3 centerinit(0.0,0.0,0.0) ; // Center look at point
 int w = 600, h = 400 ; // width and height 
 float fovy = 90.0 ; // For field of view
 float fovyinit = 90.0 ;
-
 #else 
 EXTERN vec3 eyeinit ; 
 EXTERN vec3 upinit ; 
