@@ -178,6 +178,14 @@ void draw_obj_with_texture(vector<glm::vec3> &vertices,
   glUniform1i(istex, false);
 }
 
+vector<glm::vec3> crystal_vertices, crystal_normals;
+void draw_crystal() {
+  if (crystal_vertices.size() == 0) {
+    load_obj("crystal.obj", crystal_vertices, crystal_normals);
+  }
+  draw_obj(crystal_vertices, crystal_normals);
+}
+
 vector<glm::vec3> window_vertices, window_normals;
 void draw_window() {
   if (window_vertices.size() == 0) {
@@ -890,6 +898,8 @@ void display() {
       draw_bench();
     } else if (obj -> type == arch) {
 	draw_arch();
+    } else if (obj -> type == crystal) {
+	draw_crystal();
     } else if (obj -> type == cylinder) {
         draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
     } else if (obj -> type == textured_cube) {
