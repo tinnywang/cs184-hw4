@@ -16,6 +16,7 @@ varying vec4 myvertex ;
 
 uniform sampler2D tex;
 uniform bool istex;
+uniform bool enableTextures;
 
 uniform bool isCelShaded;
 const float interval1 = 0.1;
@@ -81,7 +82,7 @@ vec4 celShade(vec3 normal, vec3 direction, vec3 halfAngle, vec4 lightcolor) {
 
 void main (void) 
 {
-    if (istex) {
+    if (istex && enableTextures) {
       gl_FragColor = texture2D(tex, gl_TexCoord[0].st);       
     } else if (enablelighting) {       
         

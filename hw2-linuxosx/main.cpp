@@ -75,6 +75,7 @@ void printHelp() {
     << "press 'z' to zoom in, 'x' to zoom out.\n"
     << "press 'o' to toggle outlines.\n"
     << "press 'l' to toggle fragment shader.\n"
+    << "press 't' to toggle textures.\n"
     << "press ESC to quit.\n" ;      
 }
 
@@ -228,6 +229,10 @@ void keyboard(unsigned char key, int x, int y) {
       glUniform1i(isCelShaded, celShade); 
       glutPostRedisplay();
     break;
+    case 't':
+      textured = !textured;
+      glUniform1i(enableTextures, textured);
+      glutPostRedisplay();
   }
   glutPostRedisplay();
 }
@@ -273,6 +278,8 @@ void init() {
   shininesscol = glGetUniformLocation(shaderprogram,"shininess") ;
   istex = glGetUniformLocation(shaderprogram, "istex");
   isCelShaded = glGetUniformLocation(shaderprogram, "isCelShaded");
+  enableTextures = glGetUniformLocation(shaderprogram, "enableTextures");
+  glUniform1i(enableTextures, true);
 
   carpet = load_texture("textures/carpet.jpg");
   textures[0] = load_texture("textures/glass.jpg");
@@ -288,6 +295,7 @@ void init() {
 
   outline = true;
   celShade = false; // use phong by default
+  textured = true;
 }
 
 int main(int argc, char* argv[]) {
