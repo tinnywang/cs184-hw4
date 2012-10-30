@@ -23,7 +23,7 @@ shininess 100
 
 translate 0 0 -45
 
-diffuse .06 .11 .11 1
+diffuse .24 .44 .44 1
 pushTransform
 room 100 100 35
 popTransform
@@ -158,7 +158,7 @@ translate 25 0 0
   popTransform
 popTransform
 
-diffuse .06 .11 .11 1
+diffuse .24 .44 .44 1
 pushTransform
 translate -25 0 0
   #pillar
