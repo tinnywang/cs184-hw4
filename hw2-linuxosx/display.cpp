@@ -142,7 +142,6 @@ void draw_obj(vector<glm::vec3> &vertices, vector<glm::vec3> &normals) {
 
 void draw_obj_with_texture(vector<glm::vec3> &vertices,
   vector<glm::vec3> &normals, vector<glm::vec2> &textures, GLuint texture) {
-  glUniform1i(enablelighting, false);
   glUniform1i(istex, true);
 
   glTexCoordPointer(2, GL_FLOAT, 0, &textures[0]); 
@@ -174,7 +173,6 @@ void draw_obj_with_texture(vector<glm::vec3> &vertices,
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   glDisable(GL_TEXTURE_2D);
 
-  glUniform1i(enablelighting, true);
   glUniform1i(istex, false);
 }
 
@@ -214,35 +212,35 @@ void draw_glass(GLuint texture) {
     t5 = glm::vec2(0, 0);
 
     for (int i = 0; i < 2; i++) {
-      glass_vertices.push_back(v1);
+      glass_vertices.push_back(v3);
       glass_vertices.push_back(v2);
-      glass_vertices.push_back(v3);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_textures.push_back(t1);
-      glass_textures.push_back(t2);
-      glass_textures.push_back(t3);
-
-      glass_vertices.push_back(v5);
       glass_vertices.push_back(v1);
-      glass_vertices.push_back(v3);
       glass_normals.push_back(normal);
       glass_normals.push_back(normal);
       glass_normals.push_back(normal);
-      glass_textures.push_back(t5);
+      glass_textures.push_back(t3);
+      glass_textures.push_back(t2);
       glass_textures.push_back(t1);
-      glass_textures.push_back(t3);
 
-      glass_vertices.push_back(v5);
       glass_vertices.push_back(v3);
-      glass_vertices.push_back(v4);
+      glass_vertices.push_back(v1);
+      glass_vertices.push_back(v5);
       glass_normals.push_back(normal);
       glass_normals.push_back(normal);
       glass_normals.push_back(normal);
-      glass_textures.push_back(t5);
       glass_textures.push_back(t3);
+      glass_textures.push_back(t1);
+      glass_textures.push_back(t5);
+
+      glass_vertices.push_back(v4);
+      glass_vertices.push_back(v3);
+      glass_vertices.push_back(v5);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
+      glass_normals.push_back(normal);
       glass_textures.push_back(t4);
+      glass_textures.push_back(t3);
+      glass_textures.push_back(t5);
 
       normal *= -1;
     }
@@ -833,7 +831,7 @@ void draw(object * obj) {
   } else if (obj -> type == cylinder) {
     draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
   } else if (obj -> type == textured_cube) {
-    draw_cube(1, 1, 1, 0, true, obj -> texture);
+    draw_cube(1, 1, 1, 0, false, obj -> texture);
   } else if (obj -> type == cube) {
     glutSolidCube(obj->size) ;
   } else if (obj -> type == sphere) {
