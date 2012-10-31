@@ -100,6 +100,10 @@ double increment = init_increment;
 int counter = 0;
 bool waiting = false;
 void animation(void) {
+  if (!animate) {
+    glutPostRedisplay();
+    return;
+  }
   if (waiting) {
     if (counter == 100000) {
       waiting = false;
@@ -233,6 +237,11 @@ void keyboard(unsigned char key, int x, int y) {
       textured = !textured;
       glUniform1i(enableTextures, textured);
       glutPostRedisplay();
+      break;
+    case 'a':
+      animate = !animate;
+      glutPostRedisplay();
+      break;
   }
   glutPostRedisplay();
 }
@@ -296,6 +305,7 @@ void init() {
   outline = true;
   celShade = false; // use phong by default
   textured = true;
+  animate = true;
 }
 
 int main(int argc, char* argv[]) {

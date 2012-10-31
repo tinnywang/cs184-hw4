@@ -95,9 +95,10 @@ EXTERN GLuint shininesscol ;
 EXTERN GLuint istex ;
 EXTERN GLuint tex;
 
-// Variables to toggle different lighting/shading/texture features
+// Variables to toggle different lighting/shading/texture/animation features
 EXTERN GLuint isCelShaded;	// phong is the default
 EXTERN bool celShade;
 EXTERN bool outline;
 EXTERN GLuint enableTextures;
 EXTERN bool textured;
+EXTERN bool animate;
