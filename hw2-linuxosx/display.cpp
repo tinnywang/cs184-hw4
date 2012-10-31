@@ -905,6 +905,14 @@ void display() {
 	    if (obj -> type == sword) {
         mat4 transf_new = Transform::translate(0, sword_move,0) * transf;
         glLoadMatrixf(&glm::transpose(transform * transf_new)[0][0]);
+      } else if (obj ->type == crystal) {
+        mat3 rotation = Transform::rotate(crystal_deg, up);
+        mat4 crys_rotate(rotation[0][0],rotation[0][1],rotation[0][2],0,
+                         rotation[1][0],rotation[1][1],rotation[1][2],0,
+                         rotation[2][0],rotation[2][1],rotation[2][2],0,
+                         0,0,0,1);
+        mat4 transf_new =  sc * transform * Transform::translate(0, 0, 45) * crys_rotate * Transform::translate(0, 0, -85) * glm::transpose(mv);
+        glLoadMatrixf(&glm::transpose(transf_new)[0][0]);
       } else {
 	      glLoadMatrixf(&glm::transpose(transform * transf)[0][0]);
       }
