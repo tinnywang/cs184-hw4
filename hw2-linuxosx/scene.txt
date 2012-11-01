@@ -312,18 +312,19 @@ cylinder 50 50 1
 popTransform
 
 #door frame
+diffuse .12 .22 .22 1
 pushTransform
 translate 0 2.5 50
 scale 1.5 1.5 1
 arch 0
 popTransform
 pushTransform
-translate 6 -7.5 50
+translate 6.7 -7.5 50
 scale 3 20 3
   pillar 0
 popTransform
 pushTransform
-translate -6 -7.5 50
+translate -6.7 -7.5 50
 scale 3 20 3
   pillar 0
 popTransform
@@ -331,8 +332,8 @@ popTransform
 #door
 pushTransform
 diffuse 0.25 .16 .01 1
-translate 0 -17 49
-door 10 25
+translate 0 -4 49
+door 12 27
 popTransform
 
 

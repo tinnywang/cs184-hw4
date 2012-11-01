@@ -304,16 +304,26 @@ vector<glm::vec3> door_vertices, door_normals;
 vector<glm::vec2> door_textures;
 void draw_door(double width, double length, GLuint texture) {
   door_vertices.push_back(glm::vec3(width/2, -length/2, 0));
-  door_vertices.push_back(glm::vec3(width/2, length/2, 0));
   door_vertices.push_back(glm::vec3(-width/2, length/2, 0));
+  door_vertices.push_back(glm::vec3(width/2, length/2, 0));
+  
+  door_vertices.push_back(glm::vec3(-width/2, length/2, 0));
+  door_vertices.push_back(glm::vec3(width/2, -length/2, 0));
   door_vertices.push_back(glm::vec3(-width/2, -length/2, 0));
-  door_normals.push_back(glm::vec3(0, 0, 1));
+  
   door_normals.push_back(glm::vec3(0, 0, -1));
   door_normals.push_back(glm::vec3(0, 0, -1));
   door_normals.push_back(glm::vec3(0, 0, -1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  
   door_textures.push_back(glm::vec2(1, 0));
-  door_textures.push_back(glm::vec2(1, 1));
   door_textures.push_back(glm::vec2(0, 1));
+  door_textures.push_back(glm::vec2(1, 1));
+  
+  door_textures.push_back(glm::vec2(0, 1));
+  door_textures.push_back(glm::vec2(1, 0));
   door_textures.push_back(glm::vec2(0, 0));
   draw_obj_with_texture(door_vertices, door_normals, door_textures, texture);
 }
