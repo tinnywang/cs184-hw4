@@ -17,6 +17,7 @@ EXTERN int amount; // The amount of rotation for each arrow press
 EXTERN vec3 eye; // The (regularly updated) vector coordinates of the eye 
 EXTERN vec3 up;  // The (regularly updated) vector coordinates of the up 
 EXTERN vec3 center;
+EXTERN double crystal_deg;
 EXTERN double sword_move;
 
 #ifdef MAINPROGRAM 

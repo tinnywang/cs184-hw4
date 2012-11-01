@@ -319,6 +319,29 @@ scale .3 .3 .3
 sword 0
 popTransform
 
+#crystal. Gotta hardcode in translation to sword to do circular effect.
+diffuse .53 .808 .98 1
+pushTransform
+translate -7 0 0
+scale .5 1.5 .5
+crystal 0
+popTransform
+pushTransform
+translate 7 0 0
+scale .5 1.5 .5
+crystal 0
+popTransform
+pushTransform
+translate 0 0 -7
+scale .5 1.5 .5
+crystal 0
+popTransform
+pushTransform
+translate 0 0 7
+scale .5 1.5 .5
+crystal 0
+popTransform
+
 #window
 pushTransform
   translate -49.5 0 0
@@ -501,7 +524,7 @@ pushTransform
     translate 0 0 -45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 0
     diffuse 1.0 0.0 1.0 1
     window 0

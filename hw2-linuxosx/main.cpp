@@ -99,13 +99,9 @@ double init_increment = .2;
 double increment = init_increment;
 int counter = 0;
 bool waiting = false;
-void animation(void) {
-  if (!animate) {
-    glutPostRedisplay();
-    return;
-  }
+void animate_sword(void) {
   if (waiting) {
-    if (counter == 100000) {
+    if (counter == 30) {
       waiting = false;
     } else {
       counter++;
@@ -113,7 +109,7 @@ void animation(void) {
     return;
   }
   if (sword_move >= 3) {
-    if (counter != 100000) {
+    if (counter != 30) {
       waiting = true;
       return;
     } else {
@@ -122,7 +118,7 @@ void animation(void) {
     up_direction = false;
     slow = false;
   } else if (sword_move <= -3) {
-    if (counter != 100000) {
+    if (counter != 30) {
       waiting = true;
       return;
     } else {
@@ -153,6 +149,20 @@ void animation(void) {
   if (sword_move > 0 && up_direction == true && !slow) {
     increment = init_increment;
     slow = true;
+  }
+}
+
+void animate_crystals(void) {
+  crystal_deg += 1;
+  if (crystal_deg == 360) {
+    crystal_deg = 0;
+  }
+}
+
+void animation(void) {
+  if (animate) {
+    animate_sword();
+    animate_crystals();
   }
   glutPostRedisplay();
 }
