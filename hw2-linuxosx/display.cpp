@@ -1063,6 +1063,7 @@ void display() {
             glUniform4fv(emissioncol, 1, obj -> emission);
             glUniform1f(shininesscol, obj -> shininess);
           }
+  glColor3f(0, 0, 0); // make things default black to get a darker scene.    	
 	if (outline) {
 	  // Draw the outline of objects
 	  glEnable(GL_CULL_FACE);
@@ -1070,7 +1071,6 @@ void display() {
 	  glEnable(GL_LINE_SMOOTH);
 	  glLineWidth(4.0);
 	  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	  glColor3f(0, 0, 0);
 	  glUniform1i(enablelighting, false);
 
           draw(obj);
@@ -1082,5 +1082,5 @@ void display() {
 	}    
 	draw(obj);
   }   
-        glutSwapBuffers();
+  glutSwapBuffers();
 }
