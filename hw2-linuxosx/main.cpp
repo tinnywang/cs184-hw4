@@ -294,6 +294,22 @@ void initTexturesAndBuffers() {
   glGenFramebuffersEXT(1, &occlusionBuffer);
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, occlusionBuffer);
   glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, occlusionMap, NULL);
+
+  GLenum status;
+  status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+  cout << status << "\n";
+  switch (status)
+  {
+     case GL_FRAMEBUFFER_UNDEFINED: cout << "framebuffer undefined";
+     case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: cout << "incomplete attachment";
+	case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: cout << "incomplete missing attachment";
+	case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER: cout << "incomplete draw buffer";
+	case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER: cout << "incomplete read buffer";
+	case GL_FRAMEBUFFER_UNSUPPORTED: cout << "framebuffer unsupported";
+	case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE: cout << "incomplete multisample";
+	case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS: cout << "incomplete layer targets";
+    }
+    
 }
 
 void init() {

@@ -313,19 +313,25 @@ popTransform
 
 #door frame
 pushTransform
-translate 0 -17 48
+translate 0 2.5 50
+scale 1.5 1.5 1
 arch 0
 popTransform
 pushTransform
-translate 2.5 -5 50
-scale 3 25 3
+translate 6 -7.5 50
+scale 3 20 3
+  pillar 0
+popTransform
+pushTransform
+translate -6 -7.5 50
+scale 3 20 3
   pillar 0
 popTransform
 
 #door
 pushTransform
 diffuse 0.25 .16 .01 1
-translate 0 -17 50
+translate 0 -17 51
 door 0
 popTransform
 
