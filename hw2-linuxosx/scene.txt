@@ -10,15 +10,15 @@ size 600 400
 camera 0 0 2 0 0 0 0 1 0 90.0
 
 #light 6.5 0 0 0 1 0.5 0 1.0 
-light 0 0 50 1 0.2 0.2 .2 1 
+#light 0 0 50 1 0.2 0.2 .2 1 
 
-light -50 -17 -50 1 0.5 0.5 .5 1 
-light 50 -17 -50 1 0.5 .5 .5 1
+#light -50 -17 -50 1 0.5 0.5 .5 1 
+#light 50 -17 -50 1 0.5 .5 .5 1
 
-
+light 0 0 -1 0 1 1 1 1 
 
 ambient 0.2 0.2 0.2 1 
-specular 1 1 1 1
+specular .06 .12 .12 1
 shininess 100
 
 translate 0 0 -45
@@ -35,6 +35,8 @@ popTransform
 
 pushTransform
 translate 25 0 0
+  specular 0 0 0 1
+  shininess 1
   #pillar
   pushTransform
   translate 0 -2.5 50
@@ -120,6 +122,8 @@ translate 25 0 0
   popTransform
   
   #bench
+  specular 1 1 1 1
+  shininess 100
   diffuse .55 .27 .075 1
   pushTransform
   translate -11.5 -17.5 45
@@ -162,6 +166,8 @@ diffuse .24 .44 .44 1
 pushTransform
 translate -25 0 0
   #pillar
+  specular 0 0 0 1
+  shininess 1
   pushTransform
   translate 0 -2.5 50
   scale 3 30 3
@@ -246,6 +252,8 @@ translate -25 0 0
   popTransform
   
   #bench
+  specular 1 1 1 1
+  shininess 100
   diffuse .55 .27 .075 1
   pushTransform
   translate 11.5 -17.5 45
@@ -311,6 +319,9 @@ diffuse .48 .5 .56 1
 popTransform
 
 #sword
+light 0 5 -85 1 1 .53 0 1 
+light 0 0 -85 1 1 .53 0 1 
+
 pushTransform
 diffuse 1 .843 0 1
 translate 0 5 -40
@@ -320,6 +331,7 @@ sword 0
 popTransform
 
 #crystal. Gotta hardcode in translation to sword to do circular effect.
+shininess 60
 diffuse .53 .808 .98 1
 pushTransform
 translate -7 0 0
@@ -341,6 +353,7 @@ translate 0 0 7
 scale .5 1.5 .5
 crystal 0
 popTransform
+shininess 100
 
 #window
 pushTransform
@@ -349,90 +362,90 @@ pushTransform
     translate 0 0 45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 35
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 25
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 15
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 5
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -5
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -15
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -25
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -35
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass -1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
 popTransform
@@ -443,90 +456,90 @@ pushTransform
     translate 0 0 45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 35
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 25
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 15
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 5
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -5
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -15
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -25
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -35
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
   pushTransform
     translate 0 0 -45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 0.0 1
+    diffuse 1.0 1.0 1.0 1
     glass 1
-    diffuse 1.0 0.0 1.0 1
+    diffuse .12 .22 .22 1
     window 0
   popTransform
 popTransform

@@ -194,8 +194,8 @@ void draw_window() {
   draw_obj(window_vertices, window_normals);
 }
 
-vector<glm::vec3> glass_vertices, glass_normals_right, glass_normals_left;
-vector<glm::vec2> glass_textures;
+vector<glm::vec3> glass_vertices_left, glass_vertices_right, glass_normals_right, glass_normals_left;
+vector<glm::vec2> glass_textures_left, glass_textures_right;
 void draw_glass(GLuint texture, GLfloat direction) {
 
   if (glass_normals_left.size() == 0 || glass_normals_right.size() == 0) {
@@ -212,56 +212,53 @@ void draw_glass(GLuint texture, GLfloat direction) {
     t3 = glm::vec2(1, 0.9);
     t4 = glm::vec2(1, 0);
     t5 = glm::vec2(0, 0);
-
-    glass_vertices.push_back(v1);
-    glass_vertices.push_back(v2);
-    glass_vertices.push_back(v3);
-    glass_textures.push_back(t1);
-    glass_textures.push_back(t2);
-    glass_textures.push_back(t3);
-
-    glass_vertices.push_back(v5);
-    glass_vertices.push_back(v1);
-    glass_vertices.push_back(v3);
-    glass_textures.push_back(t5);
-    glass_textures.push_back(t1);
-    glass_textures.push_back(t3);
-
-    glass_vertices.push_back(v5);
-    glass_vertices.push_back(v3);
-    glass_vertices.push_back(v4);
-    glass_textures.push_back(t5);
-    glass_textures.push_back(t3);
-    glass_textures.push_back(t4);
-
-    glass_vertices.push_back(v3);
-    glass_vertices.push_back(v2);
-    glass_vertices.push_back(v1);
-    glass_textures.push_back(t3);
-    glass_textures.push_back(t2);
-    glass_textures.push_back(t1);
-
-    glass_vertices.push_back(v3);
-    glass_vertices.push_back(v1);
-    glass_vertices.push_back(v5);
-    glass_textures.push_back(t3);
-    glass_textures.push_back(t1);
-    glass_textures.push_back(t5);
-
-    glass_vertices.push_back(v4);
-    glass_vertices.push_back(v3);
-    glass_vertices.push_back(v5);
-    glass_textures.push_back(t4);
-    glass_textures.push_back(t3);
-    glass_textures.push_back(t5);
-
     glm::vec3 normal = vec3(0, 0, 1);
     if (direction == -1) {
       for (int i = 0; i < 18; i++) {
-	glass_normals_left.push_back(normal);
+        glass_vertices_left.push_back(v3);
+        glass_vertices_left.push_back(v2);
+        glass_vertices_left.push_back(v1);
+        glass_textures_left.push_back(t3);
+        glass_textures_left.push_back(t2);
+        glass_textures_left.push_back(t1);
+
+        glass_vertices_left.push_back(v3);
+        glass_vertices_left.push_back(v1);
+        glass_vertices_left.push_back(v5);
+        glass_textures_left.push_back(t3);
+        glass_textures_left.push_back(t1);
+        glass_textures_left.push_back(t5);
+
+        glass_vertices_left.push_back(v4);
+        glass_vertices_left.push_back(v3);
+        glass_vertices_left.push_back(v5);
+        glass_textures_left.push_back(t4);
+        glass_textures_left.push_back(t3);
+        glass_textures_left.push_back(t5);
+	      glass_normals_left.push_back(normal);
       }
     } else {
       normal *= -1;
+      glass_vertices_right.push_back(v1);
+      glass_vertices_right.push_back(v2);
+      glass_vertices_right.push_back(v3);
+      glass_textures_right.push_back(t1);
+      glass_textures_right.push_back(t2);
+      glass_textures_right.push_back(t3);
+
+      glass_vertices_right.push_back(v5);
+      glass_vertices_right.push_back(v1);
+      glass_vertices_right.push_back(v3);
+      glass_textures_right.push_back(t5);
+      glass_textures_right.push_back(t1);
+      glass_textures_right.push_back(t3);
+
+      glass_vertices_right.push_back(v5);
+      glass_vertices_right.push_back(v3);
+      glass_vertices_right.push_back(v4);
+      glass_textures_right.push_back(t5);
+      glass_textures_right.push_back(t3);
+      glass_textures_right.push_back(t4);
       for (int i = 0; i < 18; i++) {
 	glass_normals_right.push_back(normal);
       }
@@ -269,9 +266,9 @@ void draw_glass(GLuint texture, GLfloat direction) {
   }
 
   if (direction == -1) {
-    draw_obj_with_texture(glass_vertices, glass_normals_left, glass_textures, texture);
+    draw_obj_with_texture(glass_vertices_left, glass_normals_left, glass_textures_left, texture);
   } else {
-    draw_obj_with_texture(glass_vertices, glass_normals_right, glass_textures, texture);
+    draw_obj_with_texture(glass_vertices_right, glass_normals_right, glass_textures_right, texture);
   }
 }
 
