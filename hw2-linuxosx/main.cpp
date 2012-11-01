@@ -76,6 +76,7 @@ void printHelp() {
     << "press 'o' to toggle outlines.\n"
     << "press 'l' to toggle fragment shader.\n"
     << "press 't' to toggle textures.\n"
+    << "press 'a' to toggle animation.\n"
     << "press ESC to quit.\n" ;      
 }
 
@@ -346,7 +347,7 @@ void init() {
   textures[8] = load_texture("textures/glass9.jpg");
   textures[9] = load_texture("textures/glass10.jpg");
 
-  outline = true;
+  outline = false; // off by default
   celShade = false; // use phong by default
   textured = true;
   animate = true;
