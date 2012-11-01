@@ -332,17 +332,17 @@ scale 3 20 3
 popTransform
 
 #door
-specular 1 1 1 1
-shininess 100
+specular 0 0 0 1
+shininess 40
 pushTransform
 diffuse 0.25 .16 .01 1
 translate 0 -4 49
 door 12 27
 popTransform
 
-
-
 #aisle
+specular 1 1 1 1
+shininess 40
 pushTransform
 diffuse 1 0 0 1
 translate 0 -18 0
@@ -352,6 +352,7 @@ diffuse .48 .5 .56 1
 popTransform
 
 #sword
+shininess 100
 light 0 5 -85 1 .25 .4 .5 1 
 light 0 0 -85 1 1 .53 0 1 
 light 0 -5 -85 1 .25 .4 .5 1 
