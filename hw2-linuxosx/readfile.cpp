@@ -168,7 +168,9 @@ void readfile(const char * filename) {
             cerr << "Reached Maximum Number of Objects " << numobjects << " Will ignore further objects\n" ; 
           else {
             if (cmd == "room" || cmd == "cylinder" || cmd == "barrel_vault") {
-              validinput = readvals(s, 3, values) ; 
+              validinput = readvals(s, 3, values) ;
+	    } else if (cmd == "door") {
+	      validinput = readvals(s, 2, values); 
             } else {
               validinput = readvals(s, 1, values) ; 
             }
@@ -178,6 +180,9 @@ void readfile(const char * filename) {
                 obj -> width = values[0];
                 obj -> length = values[1];
                 obj -> height = values[2];
+	      } else if (cmd == "door") {
+		obj -> width = values[0];
+		obj -> length = values[1];
 	      } else if (cmd == "barrel_vault") {
 		obj -> outer_radius = values[0];
 		obj -> inner_radius = values[1];

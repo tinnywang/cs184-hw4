@@ -331,8 +331,8 @@ popTransform
 #door
 pushTransform
 diffuse 0.25 .16 .01 1
-translate 0 -17 51
-door 0
+translate 0 -17 49
+door 10 25
 popTransform
 
 

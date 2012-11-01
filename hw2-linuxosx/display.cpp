@@ -300,6 +300,24 @@ void draw_bench() {
   draw_obj(bench_vertices, bench_normals);
 }
 
+vector<glm::vec3> door_vertices, door_normals;
+vector<glm::vec2> door_textures;
+void draw_door(double width, double length, GLuint texture) {
+  door_vertices.push_back(glm::vec3(width/2, -length/2, 0));
+  door_vertices.push_back(glm::vec3(width/2, length/2, 0));
+  door_vertices.push_back(glm::vec3(-width/2, length/2, 0));
+  door_vertices.push_back(glm::vec3(-width/2, -length/2, 0));
+  door_normals.push_back(glm::vec3(0, 0, 1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  door_normals.push_back(glm::vec3(0, 0, -1));
+  door_textures.push_back(glm::vec2(1, 0));
+  door_textures.push_back(glm::vec2(1, 1));
+  door_textures.push_back(glm::vec2(0, 1));
+  door_textures.push_back(glm::vec2(0, 0));
+  draw_obj_with_texture(door_vertices, door_normals, door_textures, texture);
+}
+
 void init_cube(double width, double length, double height, double y_start, bool inverse_norm, vector<glm::vec3> & vertices, vector<glm::vec3> & normals) {
   //left  
   if (inverse_norm) {
@@ -857,7 +875,7 @@ void draw(object * obj) {
   } else if (obj -> type == textured_cube) {
     draw_cube(1, 1, 1, 0, false, obj -> texture);
   } else if (obj -> type == door) {
-    draw_cube(10, 2.5, 25, 0, false, wood);
+    draw_door(obj -> width, obj -> length, wood);
   } else if (obj -> type == cube) {
     glutSolidCube(obj->size) ;
   } else if (obj -> type == sphere) {
