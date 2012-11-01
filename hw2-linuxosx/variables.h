@@ -48,7 +48,6 @@ EXTERN GLuint carpet;
 const int numLights = 10 ; 
 EXTERN GLfloat lightposn [4*numLights] ; // Light Positions
 EXTERN GLfloat lightcolor[4*numLights] ; // Light Colors
-EXTERN GLfloat lightransf[4*numLights] ; // Lights transformed by modelview
 EXTERN int numused ;                     // How many lights are used 
 EXTERN int num_glass;			 // How many glass panes
 
@@ -84,7 +83,8 @@ EXTERN struct object {
 
 // Variables to set uniform params for lighting fragment shader 
 EXTERN GLuint lightcol ; 
-EXTERN GLuint lightpos ; 
+EXTERN GLuint lightpos ;
+EXTERN GLuint lightScreenCoord; 
 EXTERN GLuint numusedcol ; 
 EXTERN GLuint enablelighting ; 
 EXTERN GLuint ambientcol ; 
@@ -102,3 +102,7 @@ EXTERN bool outline;
 EXTERN GLuint enableTextures;
 EXTERN bool textured;
 EXTERN bool animate;
+
+EXTERN GLuint occlusionMapLocation;
+EXTERN GLuint occlusionMap;
+EXTERN GLuint occlusionBuffer;

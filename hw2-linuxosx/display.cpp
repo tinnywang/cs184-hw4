@@ -22,6 +22,8 @@ using namespace std ;
 #include <vector>
 #include <map>
 
+
+
 GLuint load_texture(const char * filename) {
   GLuint tex2d = SOIL_load_OGL_texture(
     filename,
@@ -192,60 +194,64 @@ void draw_window() {
   draw_obj(window_vertices, window_normals);
 }
 
-vector<glm::vec3> glass_vertices, glass_normals;
+vector<glm::vec3> glass_vertices, glass_normals_right, glass_normals_left;
 vector<glm::vec2> glass_textures;
-void draw_glass(GLuint texture) {
+void draw_glass(GLuint texture, GLfloat direction) {
 
-  if (glass_vertices.size() == 0) {
-    glm::vec3 v1, v2, v3, v4, v5, normal;
+  if (glass_normals_left.size() == 0 || glass_normals_right.size() == 0) {
+    glm::vec3 v1, v2, v3, v4, v5;
     glm::vec2 t1, t2, t3, t4, t5;
     v1 = glm::vec3(-1.75, 1.9, 0);
     v2 = glm::vec3(0, 4, 0);
     v3 = glm::vec3(1.75, 1.9, 0);
     v4 = glm::vec3(1.75, -3.9, 0);
     v5 = glm::vec3(-1.75, -3.9, 0);
-    normal = glm::vec3(0, 0, 1);
+    
     t1 = glm::vec2(0, 0.9);
     t2 = glm::vec2(0.5, 1);
     t3 = glm::vec2(1, 0.9);
     t4 = glm::vec2(1, 0);
     t5 = glm::vec2(0, 0);
 
-    for (int i = 0; i < 2; i++) {
-      glass_vertices.push_back(v3);
-      glass_vertices.push_back(v2);
-      glass_vertices.push_back(v1);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_textures.push_back(t3);
-      glass_textures.push_back(t2);
-      glass_textures.push_back(t1);
+    glass_vertices.push_back(v3);
+    glass_vertices.push_back(v2);
+    glass_vertices.push_back(v1);
+    glass_textures.push_back(t3);
+    glass_textures.push_back(t2);
+    glass_textures.push_back(t1);
 
-      glass_vertices.push_back(v3);
-      glass_vertices.push_back(v1);
-      glass_vertices.push_back(v5);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_textures.push_back(t3);
-      glass_textures.push_back(t1);
-      glass_textures.push_back(t5);
+    glass_vertices.push_back(v3);
+    glass_vertices.push_back(v1);
+    glass_vertices.push_back(v5);
+    glass_textures.push_back(t3);
+    glass_textures.push_back(t1);
+    glass_textures.push_back(t5);
 
-      glass_vertices.push_back(v4);
-      glass_vertices.push_back(v3);
-      glass_vertices.push_back(v5);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_normals.push_back(normal);
-      glass_textures.push_back(t4);
-      glass_textures.push_back(t3);
-      glass_textures.push_back(t5);
+    glass_vertices.push_back(v4);
+    glass_vertices.push_back(v3);
+    glass_vertices.push_back(v5);
+    glass_textures.push_back(t4);
+    glass_textures.push_back(t3);
+    glass_textures.push_back(t5);
 
+    glm::vec3 normal = vec3(0, 0, 1);
+    if (direction == -1) {
+      for (int i = 0; i < 9; i++) {
+	glass_normals_left.push_back(normal);
+      }
+    } else {
       normal *= -1;
+      for (int i = 0; i < 9; i++) {
+	glass_normals_right.push_back(normal);
+      }
     }
   }
-  draw_obj_with_texture(glass_vertices, glass_normals, glass_textures, texture);
+
+  if (direction == -1) {
+    draw_obj_with_texture(glass_vertices, glass_normals_left, glass_textures, texture);
+  } else {
+    draw_obj_with_texture(glass_vertices, glass_normals_right, glass_textures, texture);
+  }
 }
 
 void draw_claptrap() {
@@ -821,7 +827,7 @@ void draw(object * obj) {
   } else if (obj -> type == window) {
     draw_window();
   } else if (obj -> type == glass) {
-    draw_glass(obj -> texture);
+    draw_glass(obj -> texture, obj -> size);
   } else if (obj -> type == bench) {
     draw_bench();
   } else if (obj -> type == arch) {
@@ -841,12 +847,99 @@ void draw(object * obj) {
     glutSolidTeapot(obj->size) ;
   }
 }
- 
-void display() {
-	glClearColor(0, 0, 1, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        
+void drawOcclusionMap() {
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, occlusionBuffer);
+  glUseProgram(0); // don't use any shaders
+  glViewport(0, 0, w/2, h/2);
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  mat4 mv, pm, mvp;
+  float aspect = w / (float) h, zNear = 0.1, zFar = 1000.0 ;
+  if (useGlu) {
+    pm = glm::perspective(fovy,aspect,zNear,zFar);
+    mv = glm::lookAt(eye, center, up); 
+  } else {
+    pm = Transform::perspective(fovy,aspect,zNear,zFar) ; 
+    pm = glm::transpose(mv) ; // accounting for row major
+    mv = Transform::lookAt(eye,center,up) ;
+    mv = glm::transpose(mv) ; // accounting for row major
+  }
+  mvp = pm * mv;
+  glMatrixMode(GL_PROJECTION);
+  glLoadMatrixf(&pm[0][0]);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadMatrixf(&mv[0][0]);
+  int viewport[4];
+  glGetIntegerv(GL_VIEWPORT, viewport); 
+  float x, y, z, w;
+  glm::vec4 pos;
+  glm::vec2 screen_pos;
+  for (int i = 0; i < numused; i++) {
+    // calculate screen coordinates of light
+    pos = glm::vec4(lightposn[4*i], lightposn[4*i+1], lightposn[4*i+2], lightposn[4*i+3]) * mvp;
+    if (pos.w != 0) {
+      pos.x /= pos.w; pos.y /= pos.w; pos.z /= pos.w; pos.w = 1;
+    }
+    GLfloat screenCoord[] = {viewport[0] + viewport[2] * (pos.x+1)/2,
+			   viewport[1] + viewport[3] * (pos.y+1)/2};
+    glUniform2fv(lightScreenCoord+i, 1, screenCoord);
+
+    // draw light as a point
+    GLfloat color[] = {lightcolor[4*i],
+		       lightcolor[4*i+1],
+		       lightcolor[4*i+2],
+		       lightcolor[4*i+3]};
+    GLfloat posn[] = {pos.x, pos.y, pos.z};
+    glColor4fv(&color[0]);
+    glBegin(GL_POINTS);
+    glVertex3fv(&posn[0]);
+    glEnd();
+  }
+
+  // draw occluding objects
+  mat4 sc(1.0) , tr(1.0), transf(1.0) ; 
+  sc = Transform::scale(sx,sy,1.0) ; 
+  glLoadMatrixf(&transf[0][0]) ; 
+  transf = glm::transpose(mv) * transf;	
+  transf = sc * transf;
+  for (int i = 0 ; i < numobjects ; i++) {
+    object * obj = &(objects[i]) ; 
+    {
+      mat4 transform = obj -> transform;
+        if (obj -> type == sword) {
+	  mat4 transf_new = Transform::translate(0, sword_move,0) * transf;
+	  glLoadMatrixf(&glm::transpose(transform * transf_new)[0][0]);
+	} else {
+	  glLoadMatrixf(&glm::transpose(transform * transf)[0][0]);
+        }
+    }
+    glColor3f(0, 0, 0);
+    draw(obj);
+  }
+  glGenerateMipmap(GL_TEXTURE_2D);
+}
+
+void display() {
+  /*
+  drawOcclusionMap();
+
+  glGenerateMipmapEXT(GL_TEXTURE_2D);
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+  glUseProgram(shaderprogram);
+  */
+  glClearColor(0, 0, 1, 0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // send occlusion map
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, occlusionMap);
+  glUniform1i(occlusionMapLocation, 0);
+
+  glUseProgram(shaderprogram);
+  glClearColor(0, 0, 1, 0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         // I'm including the basic matrix setup for model view to 
         // give some sense of how this works.  
 

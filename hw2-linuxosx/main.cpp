@@ -271,14 +271,30 @@ void specialKey(int key, int x, int y) {
   glutPostRedisplay();
 }
 
+void initTexturesAndBuffers() {
+  // create occlusion map texture
+  glGenTextures(1, &occlusionMap);
+  glBindTexture(GL_TEXTURE_2D, occlusionMap);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w/2, h/2, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+  // create occlusion map frame buffer
+  glGenFramebuffersEXT(1, &occlusionBuffer);
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, occlusionBuffer);
+  glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, occlusionMap, NULL);
+}
+
 void init() {
-      // Initialize shaders
+  // Initialize shaders
   vertexshader = initshaders(GL_VERTEX_SHADER, "shaders/light.vert.glsl") ;
   fragmentshader = initshaders(GL_FRAGMENT_SHADER, "shaders/light.frag.glsl") ;
   shaderprogram = initprogram(vertexshader, fragmentshader) ; 
   enablelighting = glGetUniformLocation(shaderprogram,"enablelighting") ;
   lightpos = glGetUniformLocation(shaderprogram,"lightposn") ;       
-  lightcol = glGetUniformLocation(shaderprogram,"lightcolor") ;       
+  lightcol = glGetUniformLocation(shaderprogram,"lightcolor") ; 
+  lightScreenCoord = glGetUniformLocation(shaderprogram, "lightScreenCoord");
   numusedcol = glGetUniformLocation(shaderprogram,"numused") ;       
   ambientcol = glGetUniformLocation(shaderprogram,"ambient") ;       
   diffusecol = glGetUniformLocation(shaderprogram,"diffuse") ;       
@@ -289,6 +305,7 @@ void init() {
   isCelShaded = glGetUniformLocation(shaderprogram, "isCelShaded");
   enableTextures = glGetUniformLocation(shaderprogram, "enableTextures");
   glUniform1i(enableTextures, true);
+  occlusionMapLocation = glGetUniformLocation(shaderprogram, "occlusionMap");
 
   carpet = load_texture("textures/carpet.jpg");
   textures[0] = load_texture("textures/glass.jpg");
@@ -306,6 +323,8 @@ void init() {
   celShade = false; // use phong by default
   textured = true;
   animate = true;
+
+  //initTexturesAndBuffers();
 }
 
 int main(int argc, char* argv[]) {
