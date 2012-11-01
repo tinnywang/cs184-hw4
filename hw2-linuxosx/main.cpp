@@ -318,6 +318,7 @@ void init() {
   occlusionMapLocation = glGetUniformLocation(shaderprogram, "occlusionMap");
 
   carpet = load_texture("textures/carpet.jpg");
+  wood = load_texture("textures/wood.jpg");
   textures[0] = load_texture("textures/glass.jpg");
   textures[1] = load_texture("textures/glass2.jpg");
   textures[2] = load_texture("textures/glass3.jpg");

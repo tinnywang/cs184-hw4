@@ -309,6 +309,26 @@ scale 1.5 1 1
 cylinder 50 50 1
 popTransform
 
+#door frame
+pushTransform
+translate 0 -17 48
+arch 0
+popTransform
+pushTransform
+translate 2.5 -5 50
+scale 3 25 3
+  pillar 0
+popTransform
+
+#door
+pushTransform
+diffuse 0.25 .16 .01 1
+translate 0 -17 50
+door 0
+popTransform
+
+
+
 #aisle
 pushTransform
 diffuse 1 0 0 1

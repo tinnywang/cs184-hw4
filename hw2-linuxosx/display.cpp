@@ -856,6 +856,8 @@ void draw(object * obj) {
     draw_cylinder(obj->width/2, obj->length/2, obj->height, -obj->height/2);
   } else if (obj -> type == textured_cube) {
     draw_cube(1, 1, 1, 0, false, obj -> texture);
+  } else if (obj -> type == door) {
+    draw_cube(10, 2.5, 25, 0, false, wood);
   } else if (obj -> type == cube) {
     glutSolidCube(obj->size) ;
   } else if (obj -> type == sphere) {

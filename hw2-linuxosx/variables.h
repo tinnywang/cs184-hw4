@@ -40,10 +40,11 @@ EXTERN bool useGlu; // Toggle use of "official" opengl/glm transform vs user
 EXTERN GLuint vertexshader, fragmentshader, shaderprogram ; // shaders
 static enum {view, scale} transop ; // which operation to transform 
 enum shape {cube, sphere, teapot, pillar, room, cylinder, sword, arch, bench,
-	barrel_vault, window, glass, textured_cube, crystal} ;
+	barrel_vault, window, glass, textured_cube, crystal, door} ;
 EXTERN float sx, sy ; // the scale in x and y
 EXTERN GLuint textures[10];
 EXTERN GLuint carpet;
+EXTERN GLuint wood;
 
 // Lighting parameter array, similar to that in the fragment shader
 const int numLights = 10 ; 
