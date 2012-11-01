@@ -350,7 +350,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -359,7 +359,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -368,7 +368,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -377,7 +377,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -386,7 +386,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -395,7 +395,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -404,7 +404,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -413,7 +413,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -422,7 +422,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -431,7 +431,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass -1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -444,7 +444,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -453,7 +453,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -462,7 +462,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -471,7 +471,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -480,7 +480,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -489,7 +489,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -498,7 +498,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -507,7 +507,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -516,7 +516,7 @@ pushTransform
     rotate 0 1 0 90
     scale 2 2 2
     diffuse 1.0 1.0 0.0 1
-    glass 0
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform
@@ -524,8 +524,8 @@ pushTransform
     translate 0 0 -45
     rotate 0 1 0 90
     scale 2 2 2
-    diffuse 1.0 1.0 1.0 1
-    glass 0
+    diffuse 1.0 1.0 0.0 1
+    glass 1
     diffuse 1.0 0.0 1.0 1
     window 0
   popTransform

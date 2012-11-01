@@ -213,6 +213,27 @@ void draw_glass(GLuint texture, GLfloat direction) {
     t4 = glm::vec2(1, 0);
     t5 = glm::vec2(0, 0);
 
+    glass_vertices.push_back(v1);
+    glass_vertices.push_back(v2);
+    glass_vertices.push_back(v3);
+    glass_textures.push_back(t1);
+    glass_textures.push_back(t2);
+    glass_textures.push_back(t3);
+
+    glass_vertices.push_back(v5);
+    glass_vertices.push_back(v1);
+    glass_vertices.push_back(v3);
+    glass_textures.push_back(t5);
+    glass_textures.push_back(t1);
+    glass_textures.push_back(t3);
+
+    glass_vertices.push_back(v5);
+    glass_vertices.push_back(v3);
+    glass_vertices.push_back(v4);
+    glass_textures.push_back(t5);
+    glass_textures.push_back(t3);
+    glass_textures.push_back(t4);
+
     glass_vertices.push_back(v3);
     glass_vertices.push_back(v2);
     glass_vertices.push_back(v1);
@@ -236,12 +257,12 @@ void draw_glass(GLuint texture, GLfloat direction) {
 
     glm::vec3 normal = vec3(0, 0, 1);
     if (direction == -1) {
-      for (int i = 0; i < 9; i++) {
+      for (int i = 0; i < 18; i++) {
 	glass_normals_left.push_back(normal);
       }
     } else {
       normal *= -1;
-      for (int i = 0; i < 9; i++) {
+      for (int i = 0; i < 18; i++) {
 	glass_normals_right.push_back(normal);
       }
     }
