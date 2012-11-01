@@ -975,14 +975,14 @@ void display() {
   glGenerateMipmapEXT(GL_TEXTURE_2D);
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
   glUseProgram(shaderprogram);
-  */
   glClearColor(0, 0, 1, 0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // send occlusion map
+  send occlusion map
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, occlusionMap);
   glUniform1i(occlusionMapLocation, 0);
+  */
 
   glUseProgram(shaderprogram);
   glClearColor(0, 0, 1, 0);
@@ -1064,7 +1064,17 @@ void display() {
             glUniform1f(shininesscol, obj -> shininess);
           }
   glColor3f(0, 0, 0); // make things default black to get a darker scene.    	
-	if (outline) {
+	if (wireframe) {
+          glEnable(GL_LINE_SMOOTH);
+          glLineWidth(1.0);
+          glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+          glUniform1i(enablelighting, false);
+	  draw(obj);
+	  glDisable(GL_LINE_SMOOTH);
+          glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+          glUniform1i(enablelighting, true);
+          continue; 
+	} else if (outline) {
 	  // Draw the outline of objects
 	  glEnable(GL_CULL_FACE);
 	  glCullFace(GL_FRONT);

@@ -101,6 +101,7 @@ EXTERN GLuint tex;
 EXTERN GLuint isCelShaded;	// phong is the default
 EXTERN bool celShade;
 EXTERN bool outline;
+EXTERN bool wireframe;
 EXTERN GLuint enableTextures;
 EXTERN bool textured;
 EXTERN bool animate;

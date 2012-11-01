@@ -74,6 +74,7 @@ void printHelp() {
     << "move the mouse to look around.\n"
     << "press 'z' to zoom in, 'x' to zoom out.\n"
     << "press 'o' to toggle outlines.\n"
+    << "press 'w' to toggle wireframes.\n"
     << "press 'l' to toggle fragment shader.\n"
     << "press 't' to toggle textures.\n"
     << "press 'a' to toggle animation.\n"
@@ -253,6 +254,10 @@ void keyboard(unsigned char key, int x, int y) {
       animate = !animate;
       glutPostRedisplay();
       break;
+    case 'w':
+      wireframe = !wireframe;
+      glutPostRedisplay();
+    break;
   }
   glutPostRedisplay();
 }
@@ -294,23 +299,25 @@ void initTexturesAndBuffers() {
   // create occlusion map frame buffer
   glGenFramebuffersEXT(1, &occlusionBuffer);
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, occlusionBuffer);
+  /*
   glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, occlusionMap, NULL);
 
   GLenum status;
   status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
   cout << status << "\n";
-  switch (status)
-  {
-     case GL_FRAMEBUFFER_UNDEFINED: cout << "framebuffer undefined";
-     case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: cout << "incomplete attachment";
-	case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: cout << "incomplete missing attachment";
-	case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER: cout << "incomplete draw buffer";
-	case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER: cout << "incomplete read buffer";
-	case GL_FRAMEBUFFER_UNSUPPORTED: cout << "framebuffer unsupported";
-	case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE: cout << "incomplete multisample";
-	case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS: cout << "incomplete layer targets";
-    }
-    
+  if (status == GL_FRAMEBUFFER_COMPLETE) cout << "framebuffer complete";
+  if (status == GL_FRAMEBUFFER_UNDEFINED) cout << "framebuffer undefined";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) cout << "incomplete attachment";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) cout << "framebuffer complete";
+  if (status == GL_FRAMEBUFFER_UNDEFINED) cout << "framebuffer undefined";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) cout << "incomplete attachment";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) cout << "incomplete missing attachment";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER) cout << "incomplete draw buffer";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER) cout << "incomplete read buffer";
+  if (status == GL_FRAMEBUFFER_UNSUPPORTED) cout << "framebuffer unsupported";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE) cout << "incomplete multisample";
+  if (status == GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS) cout << "incomplete layer targets";
+*/
 }
 
 void init() {
@@ -351,7 +358,7 @@ void init() {
   celShade = false; // use phong by default
   textured = true;
   animate = true;
-
+  wireframe = false;
   //initTexturesAndBuffers();
 }
 
